@@ -1,0 +1,79 @@
+%h1 CAP Validator
+
+- if @alert.valid?
+
+  %h2.valid Your CAP Document Is Valid!
+
+  %p
+    The document you submitted has been validated as CAP
+    = @alert.class::CAP_VERSION
+
+- else
+  %h2.invalid Your CAP Document Is Not Valid!
+
+#tabs
+  %ul
+    %li
+      %a{ :href => '#original_tab'}Original
+    - if @alert.valid?
+      %li
+        %a{ :href => '#xml_tab' }XML
+      %li
+        %a{ :href => '#json_tab' }JSON
+      %li
+        %a{ :href => '#yaml_tab' }YAML
+    - else
+      %li
+        %a{ :href => '#errors_tab' }Errors
+
+  #original_tab
+    %form{ :action => '/validate', :method => 'post' } 
+      %textarea{ :name => 'cap_data', :rows => 25, :cols => 80 }
+        = params[ :cap_data ]
+      %br
+      %input#validate_button{ :type => "submit", :value => "Validate" }
+  - if @alert.valid?
+    #xml_tab
+      ~ CodeRay.scan( @xml_string, :xml).div
+
+    #json_tab
+      ~ CodeRay.scan( @json_string, :json ).div
+
+    #yaml_tab
+      ~ CodeRay.scan( @yaml_string, :yaml ).div
+  - else
+    #errors_tab
+      %h3 Alert
+      %ul
+        - @alert.errors.full_messages.each do |error|
+          %li= error
+      - @alert.infos.each do |info|
+        - if info.errors.full_messages.any?
+          %h4 Info
+          %ul
+            - info.errors.full_messages.each do |error|
+              %li= error
+          - info.event_codes.each do |event_code|
+            - if event_code.errors.full_messages.any?
+              %h5 Event Code
+              %ul
+                - event_code.errors.full_messages.each do |error|
+                  %li= error
+          - info.parameters.each do |parameter|
+            - if parameter.errors.full_messages.any?
+              %h5 Parameter
+              %ul
+                - parameter.errors.full_messages.each do |error|
+                  %li= error
+          - info.resources.each do |resource|
+            - if resource.errors.full_messages.any?
+              %h5 Resource
+              %ul
+                - resource.errors.full_messages.each do |error|
+                  %li= error
+          - info.areas.each do |area|
+            - if area.errors.full_messages.any?
+              %h5 Area
+              %ul
+                - area.errors.full_messages.each do |error|
+                  %li= error

@@ -1,0 +1,26 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    assistance (0.1.5)
+    coderay (0.9.7)
+    haml (3.0.22)
+    json (1.5.1)
+    rack (1.2.2)
+    rcap (1.0.0)
+      assistance (>= 0.1.5)
+      json (>= 1.5.1)
+      uuidtools (>= 2.1.2)
+    sinatra (1.2.1)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
+    tilt (1.2.2)
+    uuidtools (2.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  coderay
+  haml
+  rcap (= 1.0.0)
+  sinatra

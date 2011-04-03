@@ -1,0 +1,13 @@
+%h1 CAP Validator
+
+#tabs
+  %ul
+    %li
+      %a{ :href => '#original_tab'}Original
+
+  #original_tab
+    %form{ :action => '/validate', :method => 'post' } 
+      %textarea{ :name => 'cap_data', :rows => 25, :cols => 80 }
+        = params[ :cap_data ]
+      %br
+      %input{ :type => "submit", :value => "Validate" }
