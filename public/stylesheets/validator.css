@@ -1,5 +1,4 @@
-h1 { font-size: 60px; }
-h2 { font-size: 48px; }
 h2.valid { color: green; }
 h2.invalid { color: red; }
-p { font-size: 30px; }
+ul#navigation { margin-bottom: 5px; }
+ul#navigation li { display: inline-block; }

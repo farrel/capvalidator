@@ -1,5 +1,3 @@
-%h1 CAP Validator
-
 - if @alert.valid?
 
   %h2.valid Your CAP Document Is Valid!
@@ -29,7 +27,7 @@
   #original_tab
     %form{ :action => '/validate', :method => 'post' } 
       %textarea{ :name => 'cap_data', :rows => 25, :cols => 80 }
-        = params[ :cap_data ]
+        ~ params[ :cap_data ]
       %br
       %input#validate_button{ :type => "submit", :value => "Validate" }
   - if @alert.valid?

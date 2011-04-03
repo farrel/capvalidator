@@ -23,3 +23,7 @@ post '/validate' do
   end
   haml( :validate )
 end
+
+get '/about' do
+  haml( :about )
+end
