@@ -17,7 +17,7 @@ post '/validate' do
   @alert = RCAP::Alert.from_xml( params[ :cap_data ]) rescue RCAP::CAP_1_2::Alert.new
   if @alert.valid?
     @xml_string = ""
-    XML_FORMATTER.write( @alert.to_xml_document.root, @xml_string ) 
+    XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
     @yaml_string = @alert.to_yaml
     @json_string = JSON.pretty_generate( @alert.to_h )
   end
