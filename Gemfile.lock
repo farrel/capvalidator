@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.7)
     assistance (0.1.5)
     coderay (0.9.7)
     haml (3.0.22)
@@ -21,7 +20,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth
   coderay
   haml
   rcap (= 1.0.0)
