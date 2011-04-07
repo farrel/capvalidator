@@ -4,7 +4,6 @@ require 'rcap'
 require 'haml'
 require 'coderay'
 require 'rexml/formatters/pretty'
-require 'redcloth'
 
 XML_FORMATTER = REXML::Formatters::Pretty.new( 2 )
 XML_FORMATTER.compact = true
