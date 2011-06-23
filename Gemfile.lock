@@ -6,7 +6,7 @@ GEM
     haml (3.0.22)
     json (1.5.1)
     rack (1.2.2)
-    rcap (1.0.0)
+    rcap (1.1.0)
       assistance (>= 0.1.5)
       json (>= 1.5.1)
       uuidtools (>= 2.1.2)
@@ -22,5 +22,5 @@ PLATFORMS
 DEPENDENCIES
   coderay
   haml
-  rcap (= 1.0.0)
+  rcap (= 1.1.0)
   sinatra
