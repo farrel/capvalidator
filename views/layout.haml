@@ -24,13 +24,16 @@
       is an implementation of the CAP document protocol in Ruby. It allows for the creation of RCAP messages from Ruby applications and the parsing of external messages.
 
     %p
-      RCAP currently supports CAP 1.1 and 1.2.
+      RCAP currently supports CAP 1.0, 1.1 and 1.2.
     
     :javascript
       $(document).ready( function() {
         $('#tabs').tabs();
         $('#validate_button').button();
         $('#clear_button').button();
+        $('#clear_button').click( function() {
+          $('#cap_data').val( '' );
+        });
       });
      
     #footer

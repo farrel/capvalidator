@@ -5,9 +5,9 @@
 
   #original_tab
     %form{ :action => '/validate', :method => 'post' } 
-      %textarea{ :name => 'cap_data', :rows => 25, :cols => 80 }
+      %textarea{ :id => 'cap_data', :name => 'cap_data', :rows => 25, :cols => 80 }
         ~ params[ :cap_data ]
       %p
         %input#validate_button{ :type => "submit", :value => "Validate" }
-        %a#clear_button{ href: "/" }
+        %a#clear_button{ href: "#" }
           Clear
