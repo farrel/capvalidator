@@ -1,4 +1,4 @@
-= CAP Validator
+# CAP Validator
 
 A Common Alerting Protocol XML document validator.
 

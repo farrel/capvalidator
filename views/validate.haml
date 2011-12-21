@@ -1,13 +1,16 @@
-- if @alert.valid?
+#result
+  - if @alert.valid?
 
-  %h2.valid Your CAP Document Is Valid!
+    %h2.valid Your CAP Document Is Valid!
 
-  %p
-    The document you submitted has been validated as CAP
-    = @alert.class::CAP_VERSION
+    %p.valid
+      The document you submitted has been validated as CAP
+      = @alert.class::CAP_VERSION
 
-- else
-  %h2.invalid Your CAP Document Is Not Valid!
+  - else
+    %h2.invalid Your CAP Document Is Not Valid!
+
+    %p.invalid Validation errors will be listed in the Errors tab.
 
 #tabs
   %ul
