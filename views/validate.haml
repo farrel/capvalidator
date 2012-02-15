@@ -44,6 +44,7 @@
 
     #yaml_tab
       ~ CodeRay.scan( @yaml_string, :yaml ).div
+
   - else
     #errors_tab
       %h3 Alert
@@ -80,3 +81,24 @@
               %ul
                 - area.errors.full_messages.each do |error|
                   %li= error
+
+- if @alert.valid?
+  #map_container
+    #map
+    %script{ :type => 'text/javascript' }
+      var map = new OpenLayers.Map('map');
+
+      var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://vmap0.tiles.osgeo.org/wms/vmap0", {layers: 'basic'} );
+      map.addLayer(wms);
+
+      var polygonLayer = new OpenLayers.Layer.Vector( "Alert Area" );
+      var polygon = new OpenLayers.Geometry.Polygon( new OpenLayers.Geometry.LinearRing([
+      = @alert.infos.first.areas.first.polygons.first.points.map{ |point| "new OpenLayers.Geometry.Point(#{ point.longitude }, #{ point.lattitude })" }.join(', ')
+      ]));
+      polygon.calculateBounds();
+
+      var polygonFeature = new OpenLayers.Feature.Vector( polygon );
+      polygonLayer.addFeatures( polygonFeature );
+      
+      map.addLayer( polygonLayer );
+      map.zoomToExtent( polygon.getBounds());
