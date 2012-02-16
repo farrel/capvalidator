@@ -12,17 +12,16 @@
 
     %p.invalid Validation errors will be listed in the Errors tab.
 
+
 #tabs
   %ul
     %li
       %a{ :href => '#original_tab'}Original
     - if @alert.valid?
       %li
-        %a{ :href => '#xml_tab' }XML
-      %li
-        %a{ :href => '#json_tab' }JSON
-      %li
-        %a{ :href => '#yaml_tab' }YAML
+        %a{ :href => '#xml_tab' }Exported XML
+      %li 
+        %a{ :href => '#map_tab' }Map
     - else
       %li
         %a{ :href => '#errors_tab' }Errors
@@ -36,14 +35,63 @@
         %a#clear_button{ href: "/" }
           Clear
   - if @alert.valid?
+    #map_tab
+      #map
+      %script{ :type => 'text/javascript' }
+        var fromProjection = new OpenLayers.Projection("EPSG:4326"); // transform from WGS 1984
+        var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+
+        var map = new OpenLayers.Map('map',{
+        units: 'm',
+        projection: fromProjection,
+        displayProjection: toProjection 
+        });
+        //var base = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://vmap0.tiles.osgeo.org/wms/vmap0", {layers: 'basic'} );
+        var base = new OpenLayers.Layer.OSM();
+        map.addLayer( base );
+        bounds = new OpenLayers.Bounds();
+        var markers = new OpenLayers.Layer.Markers( "Markers" );
+        map.addLayer(markers);
+
+        var size = new OpenLayers.Size(21,25);
+        var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+        var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
+
+
+        - polygons = @alert.infos.map{ |i| i.areas.map{ |a| a.polygons }}.flatten.compact
+        var polygonLayer = new OpenLayers.Layer.Vector( "Polygon Area" );
+        - polygons.each do |polygon|
+          var polygon = new OpenLayers.Geometry.Polygon( new OpenLayers.Geometry.LinearRing([
+          = polygon.points.map{ |point| "new OpenLayers.Geometry.Point(#{ point.longitude }, #{ point.lattitude })" }.join(', ')
+          ]));
+          polygon.calculateBounds();
+          bounds.extend( polygon.getBounds());
+
+          var polygonFeature = new OpenLayers.Feature.Vector( polygon.transform( fromProjection, toProjection ));
+          polygonLayer.addFeatures( polygonFeature );
+          var marker = new OpenLayers.Marker( polygon.getBounds().getCenterLonLat(), icon.clone())
+          markers.addMarker( marker );
+
+        map.addLayer( polygonLayer );
+
+        - circles = @alert.infos.map{ |i| i.areas.map{ |a| a.circles }}.flatten.compact
+        var circleLayer = new OpenLayers.Layer.Vector( "Circle Area" );
+        - circles.each do |circle|
+          var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
+          = "new OpenLayers.Geometry.Point( #{ circle.longitude }, #{ circle.lattitude } ),#{ circle.radius * 0.009 }, 25, 0"
+          );
+          circle.calculateBounds();
+          bounds.extend( circle.getBounds());
+
+          var circleFeature = new OpenLayers.Feature.Vector( circle.transform( fromProjection, toProjection ));
+          circleLayer.addFeatures( circleFeature );
+          
+        map.addLayer( circleLayer );
+
+        map.zoomToExtent( bounds.transform( fromProjection, toProjection ));
+
     #xml_tab
-      ~ CodeRay.scan( @xml_string, :xml).div
-
-    #json_tab
-      ~ CodeRay.scan( @json_string, :json ).div
-
-    #yaml_tab
-      ~ CodeRay.scan( @yaml_string, :yaml ).div
+      ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
 
   - else
     #errors_tab
@@ -81,41 +129,3 @@
               %ul
                 - area.errors.full_messages.each do |error|
                   %li= error
-
-- if @alert.valid?
-  #map_container
-    #map
-    %script{ :type => 'text/javascript' }
-      var map = new OpenLayers.Map('map');
-      var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://vmap0.tiles.osgeo.org/wms/vmap0", {layers: 'basic'} );
-      map.addLayer(wms);
-      bounds = new OpenLayers.Bounds();
-
-      - polygons = @alert.infos.map{ |i| i.areas.map{ |a| a.polygons }}.flatten.compact
-      - polygons.each do |polygon|
-        var polygonLayer = new OpenLayers.Layer.Vector( "Polygon Area" );
-        var polygon = new OpenLayers.Geometry.Polygon( new OpenLayers.Geometry.LinearRing([
-        = polygon.points.map{ |point| "new OpenLayers.Geometry.Point(#{ point.longitude }, #{ point.lattitude })" }.join(', ')
-        ]));
-        polygon.calculateBounds();
-        bounds.extend( polygon.getBounds());
-
-        var polygonFeature = new OpenLayers.Feature.Vector( polygon );
-        polygonLayer.addFeatures( polygonFeature );
-        
-        map.addLayer( polygonLayer );
-
-      - circles = @alert.infos.map{ |i| i.areas.map{ |a| a.circles }}.flatten.compact
-      - circles.each do |circle|
-        var circleLayer = new OpenLayers.Layer.Vector( "Circle Area" );
-        var circle = OpenLayers.Geometry.Polygon.createRegularPolygon(
-        = "new OpenLayers.Geometry.Point( #{ circle.longitude }, #{ circle.lattitude } ),#{ circle.radius * 0.009 }, 25, 0"
-        );
-        circle.calculateBounds();
-        bounds.extend( circle.getBounds());
-
-        var circleFeature = new OpenLayers.Feature.Vector( circle );
-        circleLayer.addFeatures( circleFeature );
-        
-        map.addLayer( circleLayer );
-      map.zoomToExtent( bounds );
