@@ -46,7 +46,6 @@
         projection: fromProjection,
         displayProjection: toProjection 
         });
-        //var base = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://vmap0.tiles.osgeo.org/wms/vmap0", {layers: 'basic'} );
         var base = new OpenLayers.Layer.OSM();
         map.addLayer( base );
         bounds = new OpenLayers.Bounds();

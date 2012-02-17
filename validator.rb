@@ -18,8 +18,6 @@ post '/validate' do
   if @alert.valid?
     @xml_string = ""
     XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
-    @yaml_string = @alert.to_yaml
-    @json_string = JSON.pretty_generate( @alert.to_h )
   end
   haml( :validate )
 end
