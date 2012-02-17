@@ -16,7 +16,7 @@
 #tabs
   %ul
     %li
-      %a{ :href => '#original_tab'}Original
+      %a{ :href => '#original_tab'}Original XML
     - if @alert.valid?
       %li
         %a{ :href => '#xml_tab' }Exported XML
@@ -69,8 +69,6 @@
 
           var polygonFeature = new OpenLayers.Feature.Vector( polygon.transform( fromProjection, toProjection ));
           polygonLayer.addFeatures( polygonFeature );
-          var marker = new OpenLayers.Marker( polygon.getBounds().getCenterLonLat(), icon.clone())
-          markers.addMarker( marker );
 
         map.addLayer( polygonLayer );
 
