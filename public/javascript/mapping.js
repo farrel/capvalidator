@@ -11,3 +11,12 @@ function createPolygonFeature( polygonName, polygonCoords ) {
   
   return new OpenLayers.Feature.Vector( polygon.transform( fromProjection, toProjection )); 
 }
+
+function createCircleFeature( polygonName, circleCoords ) {
+  var origin = new OpenLayers.Geometry.Point( circleCoords[ 0 ], circleCoords[ 1 ]);
+
+  var circle = new OpenLayers.Geometry.Polygon.createRegularPolygon( origin, circleCoords[ 2 ] * 0.009, 25 );
+  circle.calculateBounds();
+  
+  return new OpenLayers.Feature.Vector( circle.transform( fromProjection, toProjection )); 
+}

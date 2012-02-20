@@ -44,7 +44,7 @@
         ];
 
         var circlesData = [
-        = @alert.infos.map{ |info| info.areas.map{ |area| area.circles.any? ? [ area.area_desc, area.circles.map{ |circle| [ circle.longitude, circle.lattitude, circle.radius ]}].to_json : nil }}.compact.join(',')
+        = @alert.infos.map{ |info| info.areas.map{ |area| area.circles.any? ? { 'description' => area.area_desc, 'circles' => area.circles.map{ |circle| [ circle.longitude, circle.lattitude, circle.radius ]}}.to_json : nil }}.compact.join(',')
         ];
 
       :javascript
@@ -69,6 +69,13 @@
 
         var circles = new OpenLayers.Layer.Vector( "Circles" );
         map.addLayer( circles );
+
+        $.each( circlesData, function( i, circleData ){
+          circles.addFeatures( $.map( circleData[ "circles" ], function( circleCoords, j ){
+            return createCircleFeature( circleData[ "description" ], circleCoords );
+          }));
+        });
+        bounds.extend( circles.getDataExtent());
 
         map.zoomToExtent( bounds );
 
