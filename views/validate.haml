@@ -21,7 +21,7 @@
       %li
         %a{ :href => '#xml_tab' }Exported CAP XML
       %li 
-        %a{ :href => '#map_tab' }Map
+        %a{ :href => '#map_tab' }Alert Map
     - else
       %li
         %a{ :href => '#errors_tab' }Errors
@@ -48,36 +48,7 @@
         ];
 
       :javascript
-        var bounds = new OpenLayers.Bounds();
-        var map = new OpenLayers.Map('map',{
-          units: 'm',
-          projection: fromProjection,
-          displayProjection: toProjection });
-        var osm = new OpenLayers.Layer.OSM();
-        map.addLayer( osm );
-
-
-        var polygons = new OpenLayers.Layer.Vector( "Polygons" );
-        map.addLayer( polygons );
-
-        $.each( polygonsData, function( i, polygonData ){
-          polygons.addFeatures( $.map( polygonData[ "polygons" ], function( polygonCoords, j ){
-            return createPolygonFeature( polygonData[ "description" ], polygonCoords );
-          }));
-        });
-        bounds.extend( polygons.getDataExtent());
-
-        var circles = new OpenLayers.Layer.Vector( "Circles" );
-        map.addLayer( circles );
-
-        $.each( circlesData, function( i, circleData ){
-          circles.addFeatures( $.map( circleData[ "circles" ], function( circleCoords, j ){
-            return createCircleFeature( circleData[ "description" ], circleCoords );
-          }));
-        });
-        bounds.extend( circles.getDataExtent());
-
-        map.zoomToExtent( bounds );
+        $( document ).ready( build_map );
 
     #xml_tab
       ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
