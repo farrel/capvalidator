@@ -35,6 +35,9 @@
         %a#clear_button{ href: "/" }
           Clear
   - if @alert.valid?
+    #xml_tab
+      ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
+
     #map_tab
       #map
 
@@ -49,9 +52,6 @@
 
       :javascript
         $( document ).ready( build_map );
-
-    #xml_tab
-      ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
 
   - else
     #errors_tab
