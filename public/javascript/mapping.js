@@ -1,5 +1,6 @@
 var fromProjection = new OpenLayers.Projection("EPSG:4326"); // transform from WGS 1984
 var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+var map, selectControl, selectedFeature;
 
 function createPolygonFeature( polygonName, polygonCoords ) {
   var points = $.map( polygonCoords, function( pointCoord, i ) {
@@ -12,9 +13,34 @@ function createPolygonFeature( polygonName, polygonCoords ) {
   return new OpenLayers.Feature.Vector( polygon.transform( fromProjection, toProjection )); 
 }
 
+function onPopupClose(evt) {
+  selectControl.unselect(selectedFeature);
+} 
+
+function onFeatureSelect(feature) {
+  selectedFeature = feature;
+  popup = new OpenLayers.Popup.FramedCloud("chicken",
+      feature.geometry.getBounds().getCenterLonLat(),
+      null,
+      "<div style='font-size:.8em'>Feature: " + feature.id +"<br>Area: " + feature.geometry.getArea()+"</div>",
+      null, true, onPopupClose);
+  feature.popup = popup;
+  map.addPopup(popup);
+}
+
+function onFeatureUnselect(feature) {
+  map.removePopup(feature.popup);
+  feature.popup.destroy();
+  feature.popup = null;
+} 
+
 function addPolygonsToMap( map, polygonsData ) {
   var polygons = new OpenLayers.Layer.Vector( "Polygons" );
   map.addLayer( polygons );
+
+  selectControl = new OpenLayers.Control.SelectFeature( polygons, { onSelect: onFeatureSelect , onUnselect: onFeatureUnselect }); 
+  map.addControl( selectControl );
+  selectControl.activate();
 
   $.each( polygonsData, function( i, polygonData ){
     polygons.addFeatures( $.map( polygonData[ "polygons" ], function( polygonCoords, j ){
@@ -59,14 +85,14 @@ function init_map(){
 }
 
 function build_map(){
-  var ol_map = init_map();
-  addPolygonsToMap( ol_map, polygonsData );
-  addCirclesToMap( ol_map, circlesData );
+  map = init_map();
+  addPolygonsToMap( map, polygonsData );
+  addCirclesToMap( map, circlesData );
 
   var bounds = new OpenLayers.Bounds();
-  $.each( ol_map.layers, function(i, layer ){
+  $.each( map.layers, function(i, layer ){
     bounds.extend( layer.getDataExtent());
   });
-  ol_map.zoomToExtent( bounds );
-  return ol_map;
+  map.zoomToExtent( bounds );
+  return map;
 }
