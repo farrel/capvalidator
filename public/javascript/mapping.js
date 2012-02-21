@@ -64,6 +64,10 @@ function addCirclesToMap( map, circlesData ){
   var circles = new OpenLayers.Layer.Vector( "Circles" );
   map.addLayer( circles );
 
+  selectControl = new OpenLayers.Control.SelectFeature( circles, { onSelect: onFeatureSelect , onUnselect: onFeatureUnselect }); 
+  map.addControl( selectControl );
+  selectControl.activate();
+
   $.each( circlesData, function( i, circleData ){
     circles.addFeatures( $.map( circleData[ "circles" ], function( circleCoords, j ){
       return createCircleFeature( circleData[ "description" ], circleCoords );
