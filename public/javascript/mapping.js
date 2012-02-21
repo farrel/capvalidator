@@ -34,13 +34,9 @@ function onFeatureUnselect(feature) {
   feature.popup = null;
 } 
 
-function addPolygonsToMap( map, polygonsData ) {
+function addPolygonsToMap( polygonsData ) {
   var polygons = new OpenLayers.Layer.Vector( "Polygons" );
   map.addLayer( polygons );
-
-  selectControl = new OpenLayers.Control.SelectFeature( polygons, { onSelect: onFeatureSelect , onUnselect: onFeatureUnselect }); 
-  map.addControl( selectControl );
-  selectControl.activate();
 
   $.each( polygonsData, function( i, polygonData ){
     polygons.addFeatures( $.map( polygonData[ "polygons" ], function( polygonCoords, j ){
@@ -60,13 +56,9 @@ function createCircleFeature( polygonName, circleCoords ) {
   return new OpenLayers.Feature.Vector( circle.transform( fromProjection, toProjection )); 
 }
 
-function addCirclesToMap( map, circlesData ){
+function addCirclesToMap( circlesData ){
   var circles = new OpenLayers.Layer.Vector( "Circles" );
   map.addLayer( circles );
-
-  selectControl = new OpenLayers.Control.SelectFeature( circles, { onSelect: onFeatureSelect , onUnselect: onFeatureUnselect }); 
-  map.addControl( selectControl );
-  selectControl.activate();
 
   $.each( circlesData, function( i, circleData ){
     circles.addFeatures( $.map( circleData[ "circles" ], function( circleCoords, j ){
@@ -78,7 +70,7 @@ function addCirclesToMap( map, circlesData ){
 }
 
 function init_map(){ 
-  var map = new OpenLayers.Map('map',{
+  map = new OpenLayers.Map('map',{
     units: 'm',
     projection: fromProjection,
     displayProjection: toProjection });
@@ -89,9 +81,14 @@ function init_map(){
 }
 
 function build_map(){
-  map = init_map();
-  addPolygonsToMap( map, polygonsData );
-  addCirclesToMap( map, circlesData );
+  init_map();
+  var polygons = addPolygonsToMap( polygonsData );
+  var circles = addCirclesToMap( circlesData );
+
+  selectControl = new OpenLayers.Control.SelectFeature( [ polygons, circles ], { onSelect: onFeatureSelect , onUnselect: onFeatureUnselect }); 
+  map.addControl( selectControl );
+
+  selectControl.activate();
 
   var bounds = new OpenLayers.Bounds();
   $.each( map.layers, function(i, layer ){
