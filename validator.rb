@@ -21,3 +21,20 @@ post '/validate' do
   end
   haml( :validate )
 end
+
+ helpers do
+  def cycle
+    @_cycle ||= reset_cycle
+    @_cycle = [@_cycle.pop] + @_cycle
+    @_cycle.first
+  end
+
+  def current_cycle
+    @_cycle.first
+  end
+
+  def reset_cycle
+    @_cycle = %w(even odd)
+  end
+end
+

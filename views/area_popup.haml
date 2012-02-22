@@ -1,0 +1,42 @@
+- reset_cycle
+
+%table.popup
+  %caption= info.headline
+  %tr{ :class => cycle }
+    %th Urgency
+    %th Severity
+    %th Certainty
+  %tr.center{ :class => current_cycle }
+    %td= info.urgency.upcase
+    %td= info.severity.upcase
+    %td= info.certainty.upcase
+  %tr{ :class => cycle }
+    %th{ :colspan => 3 } Information
+  %tr{ :class => current_cycle }
+    %td{ :colspan => 3 }= info.description
+  %tr{ :class => cycle}
+    %th{ :colspan => 3 } Instruction
+  %tr{ :class => current_cycle }
+    %td{ :colspan => 3 }= info.instruction
+  %tr{ :class => cycle}
+    %th{ :colspan => 3 } Affected Area
+  %tr{ :class => current_cycle }
+    %td{ :colspan => 3 }= area.area_desc
+  %tr{ :class => cycle}
+    %th Sender
+    %td{ :colspan => 2 }
+      #{ info.sender_name } (#{ alert.sender })
+  %tr{ :class => cycle}
+    %th Identifier
+    %td{ :colspan => 2 }= alert.identifier
+  - if info.web
+    %tr{ :class => cycle}
+      %th Web Address 
+      %td
+        %a{ :href => info.web }= info.web
+  %tr{ :class => cycle}
+    %th Sent
+    %td{ :colspan => 2 }= alert.sent.strftime( "%H:%M %Z %d %b %Y" )
+  %tr{ :class => cycle}
+    %th Expires
+    %td{ :colspan => 2 }= info.expires.strftime( "%H:%M %Z %d %b %Y" )

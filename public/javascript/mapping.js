@@ -2,17 +2,6 @@ var fromProjection = new OpenLayers.Projection("EPSG:4326"); // transform from W
 var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
 var map, selectControl, selectedFeature;
 
-function createPolygonFeature( polygonName, polygonCoords ) {
-  var points = $.map( polygonCoords, function( pointCoord, i ) {
-    return new OpenLayers.Geometry.Point( pointCoord[ 0 ], pointCoord[ 1 ]);
-  });
-
-  var polygon = new OpenLayers.Geometry.Polygon( new OpenLayers.Geometry.LinearRing( points ));
-  polygon.calculateBounds();
-  
-  return new OpenLayers.Feature.Vector( polygon.transform( fromProjection, toProjection )); 
-}
-
 function onPopupClose(evt) {
   selectControl.unselect(selectedFeature);
 } 
@@ -22,7 +11,7 @@ function onFeatureSelect(feature) {
   popup = new OpenLayers.Popup.FramedCloud("chicken",
       feature.geometry.getBounds().getCenterLonLat(),
       null,
-      "<div style='font-size:.8em'>Feature: " + feature.id +"<br>Area: " + feature.geometry.getArea()+"</div>",
+      selectedFeature.attributes.popupContent,
       null, true, onPopupClose);
   feature.popup = popup;
   map.addPopup(popup);
@@ -33,6 +22,21 @@ function onFeatureUnselect(feature) {
   feature.popup.destroy();
   feature.popup = null;
 } 
+
+function createPolygonFeature( polygonPopupContent, polygonCoords ) {
+  var points = $.map( polygonCoords, function( pointCoord, i ) {
+    return new OpenLayers.Geometry.Point( pointCoord[ 0 ], pointCoord[ 1 ]);
+  });
+
+  var polygon = new OpenLayers.Geometry.Polygon( new OpenLayers.Geometry.LinearRing( points ));
+  polygon.calculateBounds();
+
+  var attributes = {
+    popupContent: polygonPopupContent
+  };
+  
+  return new OpenLayers.Feature.Vector( polygon.transform( fromProjection, toProjection ), attributes ); 
+}
 
 function addPolygonsToMap( polygonsData ) {
   var polygons = new OpenLayers.Layer.Vector( "Polygons" );
@@ -47,13 +51,17 @@ function addPolygonsToMap( polygonsData ) {
   return polygons;
 }
 
-function createCircleFeature( polygonName, circleCoords ) {
+function createCircleFeature( circlePopupContent, circleCoords ) {
   var origin = new OpenLayers.Geometry.Point( circleCoords[ 0 ], circleCoords[ 1 ]);
 
   var circle = new OpenLayers.Geometry.Polygon.createRegularPolygon( origin, circleCoords[ 2 ] * 0.009, 25 );
   circle.calculateBounds();
+
+  var attributes = {
+    popupContent: circlePopupContent
+  };
   
-  return new OpenLayers.Feature.Vector( circle.transform( fromProjection, toProjection )); 
+  return new OpenLayers.Feature.Vector( circle.transform( fromProjection, toProjection ), attributes ); 
 }
 
 function addCirclesToMap( circlesData ){
