@@ -7,14 +7,8 @@
   %ul
     %li
       %a{ :href => '#original_tab'}Original CAP XML
-    - if @alert.valid?
-      %li
-        %a{ :href => '#xml_tab' }Exported CAP XML
-      %li 
-        %a{ :href => '#map_tab' }Alert Map
-    - else
-      %li
-        %a{ :href => '#errors_tab' }Errors
+    %li
+      %a{ :href => '#errors_tab' }Errors
 
   #original_tab
     %form{ :action => '/validate', :method => 'post' } 
@@ -26,38 +20,42 @@
           Clear
 
   #errors_tab
-    %h3 Alert
-    %ul
-      - @alert.errors.full_messages.each do |error|
-        %li= error
-    - @alert.infos.each do |info|
-      - if info.errors.full_messages.any?
-        %h4 Info
-        %ul
-          - info.errors.full_messages.each do |error|
-            %li= error
-        - info.event_codes.each do |event_code|
-          - if event_code.errors.full_messages.any?
-            %h5 Event Code
-            %ul
-              - event_code.errors.full_messages.each do |error|
-                %li= error
-        - info.parameters.each do |parameter|
-          - if parameter.errors.full_messages.any?
-            %h5 Parameter
-            %ul
-              - parameter.errors.full_messages.each do |error|
-                %li= error
-        - info.resources.each do |resource|
-          - if resource.errors.full_messages.any?
-            %h5 Resource
-            %ul
-              - resource.errors.full_messages.each do |error|
-                %li= error
-        - info.areas.each do |area|
-          - if area.errors.full_messages.any?
-            %h5 Area
-            %ul
-              - area.errors.full_messages.each do |error|
-                %li= error
+    - if @alert
+      %h3 Alert
+      %ul
+        - @alert.errors.full_messages.each do |error|
+          %li= error
+      - @alert.infos.each do |info|
+        - if info.errors.full_messages.any?
+          %h4 Info
+          %ul
+            - info.errors.full_messages.each do |error|
+              %li= error
+          - info.event_codes.each do |event_code|
+            - if event_code.errors.full_messages.any?
+              %h5 Event Code
+              %ul
+                - event_code.errors.full_messages.each do |error|
+                  %li= error
+          - info.parameters.each do |parameter|
+            - if parameter.errors.full_messages.any?
+              %h5 Parameter
+              %ul
+                - parameter.errors.full_messages.each do |error|
+                  %li= error
+          - info.resources.each do |resource|
+            - if resource.errors.full_messages.any?
+              %h5 Resource
+              %ul
+                - resource.errors.full_messages.each do |error|
+                  %li= error
+          - info.areas.each do |area|
+            - if area.errors.full_messages.any?
+              %h5 Area
+              %ul
+                - area.errors.full_messages.each do |error|
+                  %li= error
+    - else
+      %p An error occured parsing the submitted CAP XML document
 
+      %p= @exception.continued_exception.message

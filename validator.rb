@@ -14,17 +14,26 @@ end
 
 
 post '/validate' do
-  @alert = RCAP::Alert.from_xml( params[ :cap_data ]) rescue RCAP::CAP_1_2::Alert.new
-  if @alert.valid?
-    @xml_string = ""
-    XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
-    haml( :validate )
-  else
+  begin
+    @alert = RCAP::Alert.from_xml( params[ :cap_data ] )
+    if @alert.valid?
+      @xml_string = ""
+      XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
+      haml( :validate )
+    else
+      haml( :error )
+    end
+  rescue REXML::ParseException => exception
+    @alert = nil
+    @exception = exception
     haml( :error )
   end
 end
 
 helpers do
+  include Rack::Utils
+  alias_method( :h, :escape_html )
+
   def cycle
     @_cycle ||= reset_cycle
     @_cycle = [@_cycle.pop] + @_cycle

@@ -1,0 +1,78 @@
+ <?xml version='1.0'?>
+<alert xmlns='urn:oasis:names:tc:emergency:cap:1.1'>
+  <identifier>KMTR1696034821</identifier>
+  <sender>KMTR@nwws.oes.ca.gov</sender>
+  <sent>2012-02-23T11:12:52-08:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <code>WWUS76 KMTR 231912</code>
+  <code>NPWMTR</code>
+  <incidents>KMTR.WI.Y.0003</incidents>
+  <info>
+    <language>en-US</language>
+    <category>Met</category>
+    <event>WIND ADVISORY</event>
+    <urgency>Future</urgency>
+    <severity>Severe</severity>
+    <certainty>Possible</certainty>
+    <expires>2012-02-23T22:00:00-08:00</expires>
+    <senderName>NATIONAL WEATHER SERVICE SAN FRANCISCO BAY AREA</senderName>
+    <headline>
+       WIND ADVISORY NOW IN EFFECT UNTIL 10 PM PST THIS EVENING FOR THE EAST BAY
+      HILLS AND THE DIABLO RANGE 
+    </headline>
+    <description>
+      THE WIND ADVISORY IS NOW IN EFFECT UNTIL 10 PM PST THIS EVENING. *
+      LOCATION: THE STRONGEST WINDS WILL OCCUR ABOVE 1000 FEET ACROSS THE EAST
+      BAY HILLS OF ALAMEDA AND CONTRA COSTA COUNTY. * IMPACTS: DOWNED TREES AND
+      BRANCHES COULD LEAD TO DOWNED POWER LINES AND ASSOCIATED POWER OUTAGES.
+      SECURE LOOSE OBJECTS AND USE EXTRA CARE WITH ANY OUTDOOR BURNING.
+      PRECAUTIONARY/PREPAREDNESS ACTIONS...
+    </description>
+    <instruction>
+      A WIND ADVISORY MEANS THAT WINDS OF 35 MPH ARE EXPECTED. WINDS THIS STRONG
+      CAN MAKE DRIVING DIFFICULT...ESPECIALLY FOR HIGH PROFILE VEHICLES. USE
+      EXTRA CAUTION. 
+    </instruction>
+    <parameter>
+      <valueName>P-VTEC</valueName>
+      <value>/O.EXT.KMTR.WI.Y.0003.000000T0000Z-120224T0600Z/</value>
+    </parameter>
+    <parameter>
+      <valueName>route</valueName>
+      <value>ncsnorth.oes.ca.gov;capserverNorth</value>
+    </parameter>
+    <area>
+      <areaDesc>EAST BAY HILLS AND DIABLO RANGE- </areaDesc>
+      <polygon>
+        38.85014,-122.821592 38.667506,-122.627396 38.705203,-122.46389
+        38.817,-122.373488 38.84565,-122.28927 38.499907,-122.118249
+        38.501283,-122.103291 38.315612,-122.054779 38.315413,-122.204982
+        38.155017,-122.19438 38.124919,-122.347796 38.031721,-122.148577
+        38.05952,-121.91161 38.018918,-121.777479 38.042393,-121.606514
+        37.542732,-121.552655 37.369663,-121.41573 37.262319,-121.449068
+        37.153135,-121.398019 37.11087,-121.22071 36.93368,-121.198647
+        36.836657,-121.131523 36.740381,-120.918731 36.488235,-120.597155
+        36.328488,-120.596562 36.294263,-120.682834 36.10799,-120.638784
+        35.917186,-120.315068 35.907186,-120.315068 35.793576,-120.213979
+        35.783234,-121.31533 35.873596,-121.435814 36.004124,-121.49607
+        36.004124,-121.56635 36.164776,-121.666756 36.29531,-121.88766
+        36.62665,-121.9278 36.62665,-121.9278 36.596527,-121.847496
+        36.696934,-121.79728 36.847546,-121.79728 36.92787,-121.85754
+        36.978077,-121.93784 36.937912,-122.05834 37.028282,-122.21899
+        37.188934,-122.39973 37.349583,-122.38969 37.500195,-122.50013
+        37.500195,-122.50013 37.640762,-122.51017 37.640762,-122.51017
+        37.84158,-122.54029 37.84158,-122.54029 37.891785,-122.65074
+        37.891785,-122.70094 37.992188,-122.83148 37.962067,-123.03229
+        38.15284,-122.962006 38.30345,-123.06242 38.444023,-123.132706
+        38.444023,-123.132706 38.51431,-123.30339 38.758173,-123.632611
+        38.85014,-122.821592
+      </polygon>
+      <geocode>
+        <valueName>UGC</valueName>
+        <value>CAZ511-240600-</value>
+      </geocode>
+    </area>
+  </info>
+</alert>

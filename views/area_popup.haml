@@ -1,7 +1,9 @@
 - reset_cycle
 
 %table.popup
-  %caption= info.headline
+  %caption= info.event
+  %tr{ :class => cycle }
+    %td{ :colspan => 3 }= info.headline
   %tr{ :class => cycle }
     %th Urgency
     %th Severity
