@@ -22,7 +22,7 @@ post '/validate' do
   haml( :validate )
 end
 
- helpers do
+helpers do
   def cycle
     @_cycle ||= reset_cycle
     @_cycle = [@_cycle.pop] + @_cycle
