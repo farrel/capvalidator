@@ -1,17 +1,9 @@
 #result
-  - if @alert.valid?
+  %h2.valid Your CAP Document Is Valid!
 
-    %h2.valid Your CAP Document Is Valid!
-
-    %p.valid
-      The document you submitted has been validated as CAP
-      = @alert.class::CAP_VERSION
-
-  - else
-    %h2.invalid Your CAP Document Is Not Valid!
-
-    %p.invalid Validation errors will be listed in the Errors tab.
-
+  %p.valid
+    The document you submitted has been validated as CAP
+    = @alert.class::CAP_VERSION
 
 #tabs
   %ul
@@ -21,7 +13,7 @@
       %li
         %a{ :href => '#xml_tab' }Exported CAP XML
       %li 
-        %a{ :href => '#map_tab' }Alert Map
+        %a{ :href => '#info_tab' }Alert Information
     - else
       %li
         %a{ :href => '#errors_tab' }Errors
@@ -34,14 +26,18 @@
         %input#validate_button{ :type => "submit", :value => "Validate" }
         %a#clear_button{ href: "/" }
           Clear
-  - if @alert.valid?
-    #xml_tab
-      ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
+  #xml_tab
+    ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
 
-    #map_tab
+
+  #info_tab
+    - polygons_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.polygons.any? }}
+    - circles_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.circles.any? }}
+    - map_required = polygons_present || circles_present
+
+    - if map_required
       %p Click on affected area for alerting information
       #map
-
       %script{ :type => 'text/javascript' }
         var polygonsData = [
         = @alert.infos.map{ |info| info.areas.map{ |area| area.polygons.any? ? { 'description' => haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area }), 'polygons' => area.polygons.map( &:points ).map{ |points| points.map{ |point| [ point.longitude, point.lattitude ]}}}.to_json : nil }}.flatten.compact.join(',')
@@ -53,40 +49,7 @@
 
       :javascript
         $( document ).ready( build_map );
-
-  - else
-    #errors_tab
-      %h3 Alert
-      %ul
-        - @alert.errors.full_messages.each do |error|
-          %li= error
+    - else
       - @alert.infos.each do |info|
-        - if info.errors.full_messages.any?
-          %h4 Info
-          %ul
-            - info.errors.full_messages.each do |error|
-              %li= error
-          - info.event_codes.each do |event_code|
-            - if event_code.errors.full_messages.any?
-              %h5 Event Code
-              %ul
-                - event_code.errors.full_messages.each do |error|
-                  %li= error
-          - info.parameters.each do |parameter|
-            - if parameter.errors.full_messages.any?
-              %h5 Parameter
-              %ul
-                - parameter.errors.full_messages.each do |error|
-                  %li= error
-          - info.resources.each do |resource|
-            - if resource.errors.full_messages.any?
-              %h5 Resource
-              %ul
-                - resource.errors.full_messages.each do |error|
-                  %li= error
-          - info.areas.each do |area|
-            - if area.errors.full_messages.any?
-              %h5 Area
-              %ul
-                - area.errors.full_messages.each do |error|
-                  %li= error
+        - info.areas.each do |area|
+          = haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area })

@@ -18,8 +18,10 @@ post '/validate' do
   if @alert.valid?
     @xml_string = ""
     XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
+    haml( :validate )
+  else
+    haml( :error )
   end
-  haml( :validate )
 end
 
 helpers do
@@ -37,4 +39,3 @@ helpers do
     @_cycle = %w(even odd)
   end
 end
-
