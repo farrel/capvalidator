@@ -23,7 +23,7 @@ post '/validate' do
     else
       haml( :error )
     end
-  rescue REXML::ParseException => exception
+  rescue => exception
     @alert = nil
     @exception = exception
     haml( :error )

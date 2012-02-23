@@ -58,4 +58,7 @@
     - else
       %p An error occured parsing the submitted CAP XML document
 
-      %p= @exception.continued_exception.message
+      - if @exception.is_a?( REXML::ParseException )
+        %p= @exception.continued_exception.message
+      - else
+        %p= @exception.message
