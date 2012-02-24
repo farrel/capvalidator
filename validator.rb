@@ -35,7 +35,7 @@ end
 VALIDATE_URL = lambda do
   begin
     @cap_data_url = Rack::Utils.unescape( params[ :cap_data_url ])
-    @cap_data = URI.parse( @cap_data_url ).read
+    @cap_data = open( @cap_data_url, "User-Agent" => "Ruby/#{RUBY_VERSION}" ){ |f| f.read }
     @alert = RCAP::Alert.from_xml( @cap_data )
     if @alert.valid?
       @xml_string = ""
