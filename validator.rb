@@ -75,6 +75,6 @@ helpers do
   end
 
   def validate_file_path( alert_file_name )
-    "/validate_url?cap_data_url=#{ h( "http://#{ request.host_with_port }/alerts/#{ alert_file_name }")}"
+    "/validate_url?cap_data_url=http://#{ request.host_with_port }/alerts/#{ alert_file_name }"
   end
 end
