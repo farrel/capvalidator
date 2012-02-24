@@ -5,7 +5,6 @@ require 'haml'
 require 'coderay'
 require 'rexml/formatters/pretty'
 require 'open-uri'
-require './url_tempfile'
 
 XML_FORMATTER = REXML::Formatters::Pretty.new( 2 )
 XML_FORMATTER.compact = true
@@ -18,9 +17,7 @@ end
 post '/validate' do
   begin
     @cap_data = params[ :cap_data ]
-    puts "<<"
     @alert = RCAP::Alert.from_xml( @cap_data )
-    puts "<<"
     if @alert.valid?
       @xml_string = ""
       XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
@@ -37,8 +34,8 @@ end
 
 VALIDATE_URL = lambda do
   begin
-    @cap_data_url = params[ :cap_data_url ]
-    @cap_data = URLTempfile.new( @cap_data_url ).read
+    @cap_data_url = Rack::Utils.unescape( params[ :cap_data_url ])
+    @cap_data = URI.parse( @cap_data_url ).read
     @alert = RCAP::Alert.from_xml( @cap_data )
     if @alert.valid?
       @xml_string = ""
@@ -60,6 +57,7 @@ get( '/validate_url', &VALIDATE_URL )
 helpers do
   include Rack::Utils
   alias_method( :h, :escape_html )
+  alias_method( :u, :escape )
 
   def cycle
     @_cycle ||= reset_cycle
@@ -76,6 +74,6 @@ helpers do
   end
 
   def validate_file_path( alert_file_name )
-    "/validate_url?cap_data_url=http://#{ request.host_with_port }/alerts/#{ alert_file_name }"
+    "/validate_url?cap_data_url=#{ u( "http://#{ request.host_with_port }/alerts/#{ alert_file_name }")}"
   end
 end
