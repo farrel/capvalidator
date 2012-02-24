@@ -24,6 +24,15 @@
     %th{ :colspan => 3 } Affected Area
   %tr{ :class => current_cycle }
     %td{ :colspan => 3 }= area.area_desc
+  - if info.resources.any?
+    %tr{ :class => cycle }
+      %th{ :colspan => 3 } Resources
+    %tr{ :class => current_cycle }
+      %td{ :colspan => 3 }
+        %ul
+          - info.resources.each do |resource|
+            %li
+              %a{ :href => resource.uri }= resource.resource_desc
   %tr{ :class => cycle}
     %th Sender
     %td{ :colspan => 2 }
@@ -34,11 +43,12 @@
   - if info.web
     %tr{ :class => cycle}
       %th Web Address 
-      %td
+      %td{ :colspan => 2 }
         %a{ :href => info.web }= info.web
   %tr{ :class => cycle}
     %th Sent
     %td{ :colspan => 2 }= alert.sent.strftime( "%H:%M %Z %d %b %Y" )
-  %tr{ :class => cycle}
-    %th Expires
-    %td{ :colspan => 2 }= info.expires.strftime( "%H:%M %Z %d %b %Y" )
+  - if info.expires
+    %tr{ :class => cycle}
+      %th Expires
+      %td{ :colspan => 2 }= info.expires.strftime( "%H:%M %Z %d %b %Y" )

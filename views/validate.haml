@@ -9,26 +9,13 @@
   %ul
     %li
       %a{ :href => '#original_tab'}Original CAP XML
-    - if @alert.valid?
-      %li
-        %a{ :href => '#xml_tab' }Exported CAP XML
-      %li 
-        %a{ :href => '#info_tab' }Alert Information
-    - else
-      %li
-        %a{ :href => '#errors_tab' }Errors
+    %li 
+      %a{ :href => '#info_tab' }Alert Information
+    %li
+      %a{ :href => '#xml_tab' }Exported CAP XML
 
   #original_tab
-    %form{ :action => '/validate', :method => 'post' } 
-      %textarea{ :name => 'cap_data', :rows => 25, :cols => 80 }
-        ~ params[ :cap_data ]
-      %p
-        %input#validate_button{ :type => "submit", :value => "Validate" }
-        %a#clear_button{ href: "/" }
-          Clear
-  #xml_tab
-    ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
-
+    = haml( :form )
 
   #info_tab
     - polygons_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.polygons.any? }}
@@ -36,7 +23,7 @@
     - map_required = polygons_present || circles_present
 
     - if map_required
-      %p Click on affected area for alerting information
+      %p Click on the highlighted area for alerting information
       #map
       %script{ :type => 'text/javascript' }
         var polygonsData = [
@@ -53,3 +40,6 @@
       - @alert.infos.each do |info|
         - info.areas.each do |area|
           = haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area })
+
+  #xml_tab
+    ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
