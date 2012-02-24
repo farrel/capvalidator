@@ -78,12 +78,4 @@
             <circle>19.380,-67.343 100.0</circle>
         </area>
     </info>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>OIeH8DbqNqZ6DhI7fPbnx1Y9dHg=</DigestValue></Reference></SignedInfo><SignatureValue>QQ1MhtuNOoJTQIDtbKszv01+gh/HQfQ8qvnu4tnhQgAm1gFPFP9OcV6aa4F6bbnOppShXkXIlAcJ
-Cr2gAyGFIrvFYbNJFBBqZztQ6479w3+/xtQzNMCO4Y2oT4wlmzQeIuq6tqiClz0UYbOroHNZuOeG
-h46u+jRDc/CTe9S2O3tolDMMamR3+oKVMp7mG63R565gJodIdp1PN2rrjSwSUNEC5yUwBjkeB1hs
-cjgnvMrI5eFOfsonP8fTtVDIcad2mvg7eI5+mAyir6+Obu8SZNgKwM0bdqflYsHppApK57GcVwQI
-re2D1SLJ8Uejhwkic3i0QPmxYAnsrYzNKfxQvg==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>iqSOSGRoJI7hg8yUih5WFOPcEsc4bZhYwQ1etBSM5eYip4pc2xr3n5aMnJOCatFUIiJBxIfopp+9
-w5W52LvqQJst+qkfv6ZV6ZUu86lLV1znXKOf10b1JtBtkZiJA+alaE1xd+oMmz+KdYRpoAaVFKM7
-ClnXu16pV9ZLHHtLmAe6sO+MIZ+up1Q+9CqF32rJXM4exPKqdEBCHYrz1iCAjDApRwxXb60D4wtQ
-EtTF9t9z3k1RjnbviozWQuF/k5MzdcVbCfRJk8s3kF+oaJolWd3ukOfExpBQFiIQ8ritEbLWS+z3
-yd66g9CdXRvJZWht4MWamDOClBaRnNKGflutAQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue></KeyInfo></Signature></alert>
+</alert>
