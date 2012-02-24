@@ -74,6 +74,6 @@ helpers do
   end
 
   def validate_file_path( alert_file_name )
-    "/validate_url?cap_data_url=#{ u( "http://raw.github.com/farrel/CAP-Validator/master/public/alerts/#{ alert_file_name }")}"
+    "/validate_url?cap_data_url=#{ u( "https://raw.github.com/farrel/CAP-Validator/master/public/alerts/#{ alert_file_name }")}"
   end
 end
