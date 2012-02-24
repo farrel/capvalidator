@@ -1,3 +1,5 @@
+%p
+  Paste the CAP XML document in the text box below:
 %form{ :action => '/validate', :method => 'post' } 
   %textarea{ :id => 'cap_data', :name => 'cap_data', :rows => 25 }= h( @cap_data )
   %p
@@ -5,13 +7,13 @@
     %a.clear_button{ href: "#" }Clear
 
 %p
-  Or provide a URL pointing to a CAP document on the web:
+  Provide a URL pointing to a CAP XML document on the web:
   %form{ :action => '/validate_url', :method => 'post' } 
     %input{ :name => 'cap_data_url', :size => 50, :value => @cap_data_url }
     %input.validate_button{ :type => "submit", :value => "Validate" }
 
 %p
-  Try these sample CAP documents:
+  Try these sample CAP XML documents:
 %ul
   %li
     %a{ :href => validate_file_path( 'east_bay_wind_cap.xml' )} Wind Advisory for Northern California Coast, USA
