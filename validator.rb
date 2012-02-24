@@ -5,6 +5,7 @@ require 'haml'
 require 'coderay'
 require 'rexml/formatters/pretty'
 require 'open-uri'
+require './url_tempfile'
 
 XML_FORMATTER = REXML::Formatters::Pretty.new( 2 )
 XML_FORMATTER.compact = true
@@ -37,7 +38,7 @@ end
 VALIDATE_URL = lambda do
   begin
     @cap_data_url = params[ :cap_data_url ]
-    @cap_data = URI.parse( @cap_data_url ).read
+    @cap_data = URLTempfile.new( @cap_data_url ).read
     @alert = RCAP::Alert.from_xml( @cap_data )
     if @alert.valid?
       @xml_string = ""
