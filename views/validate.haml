@@ -25,6 +25,7 @@
     - map_required = polygons_present || circles_present
 
     - if map_required
+      %h2 Alert Map
       %p 
         %strong 
           Click on the highlighted area for alerting information
@@ -41,6 +42,7 @@
       :javascript
         $( document ).ready( build_map );
     - else
+      %h2 Alert Details
       - @alert.infos.each do |info|
         - info.areas.each do |area|
           = haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area })
