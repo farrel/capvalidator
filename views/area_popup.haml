@@ -1,5 +1,4 @@
 - reset_cycle
-
 %table.popup
   %caption= info.event
   %tr{ :class => cycle }
@@ -37,14 +36,14 @@
     %th Sender
     %td{ :colspan => 2 }
       #{ info.sender_name } (#{ alert.sender })
-  %tr{ :class => cycle}
-    %th Identifier
-    %td{ :colspan => 2 }= alert.identifier
   - if info.web
     %tr{ :class => cycle}
       %th Web Address 
       %td{ :colspan => 2 }
         %a{ :href => info.web }= info.web
+  %tr{ :class => cycle}
+    %th Identifier
+    %td{ :colspan => 2 }= alert.identifier
   %tr{ :class => cycle}
     %th Sent
     %td{ :colspan => 2 }= alert.sent.strftime( "%H:%M %Z %d %b %Y" )
