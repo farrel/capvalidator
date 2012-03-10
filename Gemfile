@@ -4,4 +4,8 @@ gem "sinatra"
 gem "rcap", "1.3.0"
 gem "haml"
 gem "coderay"
-gem "bootstrap-sass"
+
+group( 'development' ) do
+  gem "compass"
+  gem "bootstrap-sass"
+end
