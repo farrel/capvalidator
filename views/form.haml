@@ -6,17 +6,25 @@
 %form{ :action => '/validate', :method => 'post' } 
   %textarea{ :id => 'cap_data', :name => 'cap_data', :rows => 25 }= h( @cap_data )
   %p
-    %input.validate_button{ :type => "submit", :value => "Validate" }
-    %a.clear_button{ href: "#" }Clear
+    %input.btn-primary{ :type => "submit", :value => "Validate" }
+    %button#clear_button.btn{ href: "#" }Clear
+
+:javascript
+  $(document).ready( function() {
+    $('#clear_button').click( function() {
+      $('#cap_data').val( '' );
+    });
+  });
 
 %h2
   Validate CAP Alert on the Web
 %p 
   Paste a URL to a CAP XML Alert in the text field below.
 
-%form{ :action => '/validate_url', :method => 'post' } 
-  %input{ :name => 'cap_data_url', :size => 50, :value => @cap_data_url }
-  %input.validate_button{ :type => "submit", :value => "Validate" }
+%form.inline-form{ :action => '/validate_url', :method => 'post' } 
+  %p
+    %input{ :type => 'text', :name => 'cap_data_url', :value => @cap_data_url }
+    %input.btn-primary{ :type => "submit", :value => "Validate" }
 
 %h2
   Example CAP Alerts

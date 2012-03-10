@@ -8,7 +8,7 @@ function onPopupClose(evt) {
 
 function onFeatureSelect(feature) {
   selectedFeature = feature;
-  popup = new OpenLayers.Popup.FramedCloud("chicken",
+  popup = new OpenLayers.Popup.FramedCloud("cap_frame",
       feature.geometry.getBounds().getCenterLonLat(),
       null,
       selectedFeature.attributes.popupContent,

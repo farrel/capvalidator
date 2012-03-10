@@ -48,4 +48,9 @@
           = haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area })
 
   #xml_tab
-    ~ CodeRay.scan( @xml_string, :xml).div( :line_numbers => :table )
+    ~ CodeRay.scan( @xml_string, :xml).div
+
+:javascript
+  $(document).ready( function(){
+    $('#tabs').tabs();
+  });

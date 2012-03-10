@@ -15,7 +15,6 @@
   #original_tab
     = haml( :form )
       
-
   #errors_tab
     - if @alert
       %h3 Alert
@@ -59,3 +58,8 @@
         %p= @exception.continued_exception.message
       - else
         %p= @exception.message
+
+:javascript
+  $(document).ready( function(){
+    $('#tabs').tabs();
+  });

@@ -3,3 +3,111 @@
 
 // Include responsive Bootstrap styles
 // @import "bootstrap-responsive";
+
+
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+  .cap_logo {
+    position:relative;
+    height: 1.5em;
+    top: 0.25em;
+  }
+}
+
+#result { 
+  text-align: center;
+
+  .valid {
+    color: green;
+  }
+
+  .invalid {
+    color: red;
+  }
+
+  img.result_icon{ 
+    position: relative;
+    height: 1.5em;
+    top: 0.25em;
+  }
+
+  p {
+    font-size: 1.5em;
+  }
+}
+
+
+ul#navigation {
+  margin-bottom: 5px;
+  li {
+    display: inline-block;
+  }
+}
+
+div.float_left {
+  float: left;
+}
+
+div.float_right { 
+  float: right
+}
+
+.clear_both {
+  clear: both;
+}
+
+.border {
+  border: solid 1px black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#map {
+  border: solid 1px black;
+  height: 600px;
+}
+
+#info {
+ clear: both;
+ margin-top: 10px;
+}
+
+#footer {
+  border-top: solid 1px gray;
+  clear: both;
+}
+
+.line-numbers {
+  background-color: #EEEEEE;
+}
+
+textarea {
+  width: 100%;
+}
+
+table.popup {
+  width: 300px;
+  border-collapse: collapse;
+
+  caption {
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #CC0000;
+    color: #FFFFFF;
+  }
+
+  tr.center {
+    text-align: center;
+  }
+
+  tr.even {
+    background-color: #EEEEEE;
+  }
+}
+
+form {
+  button.btn {
+    margin-bottom: 9px;
+  }
+}
