@@ -4659,6 +4659,6 @@ table.popup tr.even {
 }
 
 /* line 110, ../../sass/styles.scss */
-form button.btn {
+form a.btn {
   margin-bottom: 9px;
 }

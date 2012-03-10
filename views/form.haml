@@ -7,7 +7,7 @@
   %textarea{ :id => 'cap_data', :name => 'cap_data', :rows => 25 }= h( @cap_data )
   %p
     %input.btn-primary{ :type => "submit", :value => "Validate" }
-    %button#clear_button.btn{ href: "#" }Clear
+    %a#clear_button.btn{ href: "#" }Clear
 
 :javascript
   $(document).ready( function() {
