@@ -46,8 +46,8 @@
     %td{ :colspan => 2 }= alert.identifier
   %tr{ :class => cycle}
     %th Sent
-    %td{ :colspan => 2 }= alert.sent.strftime( "%H:%M %Z %d %b %Y" )
+    %td{ :colspan => 2 }= alert.sent.strftime( "%d %b %Y %H:%M %Z" )
   - if info.expires
     %tr{ :class => cycle}
       %th Expires
-      %td{ :colspan => 2 }= info.expires.strftime( "%H:%M %Z %d %b %Y" )
+      %td{ :colspan => 2 }= info.expires.strftime( "%d %b %Y %H:%M %Z" )
