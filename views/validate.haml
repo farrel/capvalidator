@@ -1,11 +1,7 @@
-#result
-  %h2.valid
-    %img.result_icon{ :src => 'images/check-icon.png' }
-    Your CAP Document Is Valid!
-
-  %p.valid
-    The document you submitted has been validated as CAP
-    = @alert.class::CAP_VERSION
+#result.alert.alert-block.alert-success
+  %h2.alert-heading Your CAP Document Is Valid!
+  %p The document you submitted has been validated as CAP #{ @alert.class::CAP_VERSION }.
+  %p Click the Alert Information tab for details about the Alert.
 
 #tabs
   %ul
@@ -28,7 +24,7 @@
       %h2 Alert Map
       %p 
         %strong 
-          Click on the highlighted area for alerting information
+          Click on the highlighted area for further alerting information
       #map
       %script{ :type => 'text/javascript' }
         var polygonsData = [
