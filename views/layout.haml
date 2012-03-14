@@ -1,8 +1,7 @@
 !!! 5
 %html
   %head
-    %title
-      Common Alerting Protocol Validator
+    %title Common Alerting Protocol Validator
     %link{ :type => 'text/css', :rel => 'stylesheet', :href=> 'stylesheets/smoothness/jquery-ui-1.8.11.custom.css' }
     %link{ :type => 'text/css', :rel => 'stylesheet', :href=> 'stylesheets/styles.css' }
 
@@ -37,12 +36,11 @@
           %p
             RCAP currently supports CAP 1.0, 1.1 and 1.2.
 
-      #footer
-        %p
-          Developed by
-          %a{ :href => "http://www.aimred.com" }Aimred
-          in Cape Town, South Africa. Validated using
-          %a{ :href => "http://www.aimred.com/projects/rcap" }RCAP
-          == #{ RCAP::VERSION }.
-          CAP Validator source available at
-          %a{ :href => "http://github.com/farrel/CAP-Validator" }Github.
+      %p#footer
+        Developed by
+        %a{ :href => "http://www.aimred.com" }Aimred
+        in Cape Town, South Africa. Validated using
+        %a{ :href => "http://www.aimred.com/projects/rcap" }RCAP
+        == #{ RCAP::VERSION }.
+        CAP Validator source available at
+        %a{ :href => "http://github.com/farrel/CAP-Validator" }Github.
