@@ -1,6 +1,8 @@
 # CAP Validator
 
-A Common Alerting Protocol XML document validator.
+A Common Alerting Protocol XML document validator currently running at [http://capvalidator.heroku.com](http://capvalidator.heroku.com).
+
+To install and run locally:
 
 1. git clone git://github.com/farrel/CAP-Validator.git capvalidator
 2. cd capvalidator
