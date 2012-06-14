@@ -1,19 +1,16 @@
 #result.alert.alert-block.alert-success
   %h2.alert-heading Your CAP Document Is Valid!
   %p The document you submitted has been validated as CAP #{ @alert.class::CAP_VERSION }.
-  %p Click the Alert Information tab for details about the Alert.
 
 #tabs
   %ul
-    %li
-      %a{ :href => '#original_tab'}Original CAP XML
     %li 
       %a{ :href => '#info_tab' }Alert Information
     %li
+      %a{ :href => '#original_tab'}Original CAP XML
+    %li
       %a{ :href => '#xml_tab' }Exported CAP XML
 
-  #original_tab
-    = haml( :form )
 
   #info_tab
     - polygons_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.polygons.any? }}
@@ -42,6 +39,9 @@
       - @alert.infos.each do |info|
         - info.areas.each do |area|
           = haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area })
+
+  #original_tab
+    = haml( :form )
 
   #xml_tab
     ~ CodeRay.scan( @xml_string, :xml).div
