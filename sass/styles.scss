@@ -7,7 +7,6 @@ $linkColor: #ED1C24;
 @import "bootstrap-responsive";
 
 
-
 h1 {
   text-align: center;
   margin-bottom: 5px;
@@ -21,6 +20,10 @@ h1 {
     text-decoration: none;
     color: $linkColor;
   }
+}
+
+img {
+  max-width: inherit;
 }
 
 #result { 
@@ -79,8 +82,9 @@ textarea {
   width: 100%;
 }
 
+
 table.popup {
-  width: 600px;
+  width: 500px;
   border-collapse: collapse;
 
   caption {
