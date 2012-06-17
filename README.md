@@ -7,6 +7,6 @@ To install and run locally:
 1. git clone git://github.com/farrel/CAP-Validator.git capvalidator
 2. cd capvalidator
 3. bundle install
-4. ruby validator.rb
+4. rackup
 
-Point your browser to http://localhost:4567
+Point your browser to http://localhost:9292
