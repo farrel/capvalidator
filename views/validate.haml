@@ -20,7 +20,7 @@
 
 
   #info_tab
-    - polygons_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.polygons.any? }}
+    - polygons_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.polygons.any?{ |polygon| polygon.points.size > 0 }}}
     - circles_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.circles.any? }}
     - map_required = polygons_present || circles_present
 
@@ -55,6 +55,7 @@
   - if !@alert.valid? 
     #errors_tab
       %h2 Validation Errors
+      %h3 Alert
       %ul
         - @alert.errors.full_messages.each do |error|
           %li= error
