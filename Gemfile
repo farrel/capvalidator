@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "sinatra"
-gem "rcap", "1.3.0"
+gem "rcap", "1.3.1"
 gem "haml"
 gem "coderay"
 
