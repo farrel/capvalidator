@@ -18,13 +18,9 @@ post '/validate' do
   begin
     @cap_data = params[ :cap_data ]
     @alert = RCAP::Alert.from_xml( @cap_data )
-    if @alert.valid?
-      @xml_string = ""
-      XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
-      haml( :validate )
-    else
-      haml( :error )
-    end
+    @xml_string = ""
+    XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
+    haml( :validate )
   rescue => exception
     @alert = nil
     @exception = exception
@@ -37,13 +33,9 @@ VALIDATE_URL = lambda do
     @cap_data_url = Rack::Utils.unescape( params[ :cap_data_url ])
     @cap_data = open( @cap_data_url, "User-Agent" => "Ruby/#{RUBY_VERSION}" ){ |f| f.read }
     @alert = RCAP::Alert.from_xml( @cap_data )
-    if @alert.valid?
-      @xml_string = ""
-      XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
-      haml( :validate )
-    else
-      haml( :error )
-    end
+    @xml_string = ""
+    XML_FORMATTER.write( @alert.to_xml_document, @xml_string ) 
+    haml( :validate )
   rescue => exception
     @alert = nil
     @exception = exception

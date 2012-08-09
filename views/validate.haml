@@ -1,15 +1,22 @@
-#result.alert.alert-block.alert-success
-  %h2.alert-heading Your CAP Document Is Valid!
-  %p The document you submitted has been validated as CAP #{ @alert.class::CAP_VERSION }.
+-if @alert.valid?
+  #result.alert.alert-block.alert-success
+    %h2.alert-heading Your CAP Document Is Valid!
+    %p The document you submitted has been validated as CAP #{ @alert.class::CAP_VERSION }.
+- else
+  #result.alert.alert-block.alert-error
+    %h2.alert-heading Your CAP Document Is Not Valid!
+    %p Validation errors will be listed in the Errors tab.
+
 
 #tabs
   %ul
     %li 
       %a{ :href => '#info_tab' }Alert Information
     %li
-      %a{ :href => '#original_tab'}Original CAP XML
-    %li
       %a{ :href => '#xml_tab' }Exported CAP XML
+    - if !@alert.valid?
+      %li
+        %a{ :href => "#errors_tab"}Errors
 
 
   #info_tab
@@ -40,15 +47,51 @@
         - info.areas.each do |area|
           = haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area })
 
-  #original_tab
-    = haml( :form )
-
   #xml_tab
     %h2 Exported CAP XML
     %p Below is a formatted version of the original CAP Alert.
     ~ CodeRay.scan( @xml_string, :xml).div
 
+  - if !@alert.valid? 
+    #errors_tab
+      %h2 Validation Errors
+      %ul
+        - @alert.errors.full_messages.each do |error|
+          %li= error
+      - @alert.infos.each do |info|
+        - if info.errors.full_messages.any?
+          %h4 Info
+          %ul
+            - info.errors.full_messages.each do |error|
+              %li= error
+          - info.event_codes.each do |event_code|
+            - if event_code.errors.full_messages.any?
+              %h5 Event Code
+              %ul
+                - event_code.errors.full_messages.each do |error|
+                  %li= error
+          - info.parameters.each do |parameter|
+            - if parameter.errors.full_messages.any?
+              %h5 Parameter
+              %ul
+                - parameter.errors.full_messages.each do |error|
+                  %li= error
+          - info.resources.each do |resource|
+            - if resource.errors.full_messages.any?
+              %h5 Resource
+              %ul
+                - resource.errors.full_messages.each do |error|
+                  %li= error
+          - info.areas.each do |area|
+            - if area.errors.full_messages.any?
+              %h5 Area
+              %ul
+                - area.errors.full_messages.each do |error|
+                  %li= error
+
 :javascript
   $(document).ready( function(){
     $('#tabs').tabs();
   });
+
+= haml( :form )
