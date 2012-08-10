@@ -27,19 +27,12 @@
     %input.btn-primary{ :type => "submit", :value => "Validate" }
 
 %h2
-  Example CAP Alerts
+  Recent NWS CAP Alerts
 %p
-  Click a link below to validate a sample CAP XML Alert.
+  Click a link below to validate a recent CAP Alert issued by the
+  %a{ :href=> "http://alerts.weather.gov"}National Weather Service Alerts Feeds.
+  
 %ul
-  %li
-    %a{ :href => validate_file_path( 'east_bay_wind_cap.xml' )} Wind Advisory for Northern California Coast
-    (CAP 1.1 with polygon mapping data)
-  %li
-    %a{ :href => validate_file_path( 'ottawa_roads_cap.xml' )} Road Conditions Advisory for Ottawa
-    (CAP 1.1 with polygon mapping data)
-  %li
-    %a{ :href => validate_file_path( 'usgs_earthquake_cap.xml' )} US Geological Survey Earthquake Advisory
-    (CAP 1.1 with circle mapping data)
-  %li
-    %a{ :href => validate_file_path( 'us_dhs_orange_cap.xml' )} US Dept of Homeland Security Advisory
-    (CAP 1.2)
+  - recent_nws_alerts.each do |item|
+    %li
+      %a{ :href => validate_file_path( item.link.href )}= item.title.content

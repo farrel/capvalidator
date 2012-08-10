@@ -5,6 +5,7 @@ require 'haml'
 require 'coderay'
 require 'rexml/formatters/pretty'
 require 'open-uri'
+require 'rss'
 
 XML_FORMATTER = REXML::Formatters::Pretty.new( 2 )
 XML_FORMATTER.compact = true
@@ -65,7 +66,14 @@ helpers do
     @_cycle = %w(even odd)
   end
 
-  def validate_file_path( alert_file_name )
-    "/validate_url?cap_data_url=#{ u( "https://raw.github.com/farrel/CAP-Validator/master/public/alerts/#{ alert_file_name }")}"
+  def validate_file_path( url )
+    "/validate_url?cap_data_url=#{ u( url )}"
+  end
+
+  def recent_nws_alerts
+    url = "http://alerts.weather.gov/cap/us.php?x=0"
+    open(url) do |rss|
+      RSS::Parser.parse(rss).items[0..5]
+    end
   end
 end
