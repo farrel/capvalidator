@@ -73,7 +73,7 @@ helpers do
   def recent_nws_alerts
     url = "http://alerts.weather.gov/cap/us.php?x=0"
     open(url) do |rss|
-      RSS::Parser.parse(rss).items[0..5]
+      RSS::Parser.parse(rss).items[0..4]
     end
   end
 end
