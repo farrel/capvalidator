@@ -6,6 +6,7 @@ require 'coderay'
 require 'rexml/formatters/pretty'
 require 'open-uri'
 require 'rss'
+require 'timeout'
 
 XML_FORMATTER = REXML::Formatters::Pretty.new( 2 )
 XML_FORMATTER.compact = true
@@ -71,9 +72,13 @@ helpers do
   end
 
   def recent_nws_alerts
-    url = "http://alerts.weather.gov/cap/us.php?x=0"
-    open(url) do |rss|
-      RSS::Parser.parse(rss).items[0..4]
+    Timeout.timeout( 10 ) do
+      url = "http://alerts.weather.gov/cap/us.php?x=0"
+      open(url) do |rss|
+        RSS::Parser.parse(rss).items[0..4]
+      end
     end
+  rescue
+    []
   end
 end

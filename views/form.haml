@@ -25,14 +25,15 @@
   %p
     %input.input-xxlarge{ :type => 'text', :name => 'cap_data_url', :value => @cap_data_url }
     %input.btn-primary{ :type => "submit", :value => "Validate" }
-
-%h2
-  Recent NWS CAP Alerts
-%p
-  Click a link below to validate a recent CAP Alert issued by the
-  %a{ :href=> "http://alerts.weather.gov"}National Weather Service Alerts Feeds.
-  
-%ul
-  - recent_nws_alerts.each do |item|
-    %li
-      %a{ :href => validate_file_path( item.link.href )}= item.title.content
+      
+- if ( nws_alerts = recent_nws_alerts ).any?
+  %h2
+    Recent NWS CAP Alerts
+  %p
+    Click a link below to validate a recent CAP Alert issued by the
+    %a{ :href=> "http://alerts.weather.gov"}National Weather Service Alerts Feeds.
+    
+  %ul
+    - nws_alerts.each do |item|
+      %li
+        %a{ :href => validate_file_path( item.link.href )}= item.title.content

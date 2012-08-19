@@ -6055,22 +6055,22 @@ h1 {
 h1 .cap_logo {
   position: relative;
   height: 1.5em;
-  top: 0.25em;
 }
-/* line 19, ../../sass/styles.scss */
+/* line 18, ../../sass/styles.scss */
 h1 a:hover {
   text-decoration: none;
   color: #ed1c24;
 }
 
-/* line 25, ../../sass/styles.scss */
+/* line 24, ../../sass/styles.scss */
 img {
   max-width: inherit;
 }
 
-/* line 29, ../../sass/styles.scss */
+/* line 28, ../../sass/styles.scss */
 #result {
   text-align: center;
+  clear: both;
 }
 /* line 31, ../../sass/styles.scss */
 #result p {
@@ -6137,27 +6137,26 @@ textarea {
 }
 
 /* line 86, ../../sass/styles.scss */
-table.popup {
-  width: 500px;
+table {
   border-collapse: collapse;
 }
-/* line 90, ../../sass/styles.scss */
-table.popup caption {
+/* line 89, ../../sass/styles.scss */
+table caption {
   font-size: 1.2em;
   font-weight: bold;
   background-color: #CC0000;
   color: #FFFFFF;
 }
-/* line 97, ../../sass/styles.scss */
-table.popup tr.center {
+/* line 96, ../../sass/styles.scss */
+table tr.center {
   text-align: center;
 }
-/* line 101, ../../sass/styles.scss */
-table.popup tr.even {
+/* line 100, ../../sass/styles.scss */
+table tr.even {
   background-color: #EEEEEE;
 }
 
-/* line 107, ../../sass/styles.scss */
+/* line 106, ../../sass/styles.scss */
 form a.btn {
   margin-bottom: 9px;
 }

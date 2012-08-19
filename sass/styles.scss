@@ -13,7 +13,6 @@ h1 {
   .cap_logo {
     position:relative;
     height: 1.5em;
-    top: 0.25em;
   }
 
   a:hover {
@@ -28,6 +27,7 @@ img {
 
 #result { 
   text-align: center;
+  clear: both;
   p {
     font-size: 1.5em;
   }
@@ -83,8 +83,7 @@ textarea {
 }
 
 
-table.popup {
-  width: 500px;
+table {
   border-collapse: collapse;
 
   caption {

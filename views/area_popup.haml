@@ -1,54 +1,9 @@
-- reset_cycle
-%table.table.table-condensed.popup
-  %caption= info.event
-  %tr{ :class => cycle }
-    %td{ :colspan => 3 }= info.headline
-  %tr{ :class => cycle }
-    %th Urgency
-    %th Severity
-    %th Certainty
-  %tr.center{ :class => current_cycle }
-    %td= info.urgency.upcase
-    %td= info.severity.upcase
-    %td= info.certainty.upcase
-  %tr{ :class => cycle }
-    %th{ :colspan => 3 } Information
-  %tr{ :class => current_cycle }
-    %td{ :colspan => 3 }= info.description
-  - if !info.instruction.blank?
-    %tr{ :class => cycle}
-      %th{ :colspan => 3 } Instruction
-    %tr{ :class => current_cycle }
-      %td{ :colspan => 3 }= info.instruction
-  %tr{ :class => cycle}
-    %th{ :colspan => 3 } Affected Area
-  %tr{ :class => current_cycle }
-    %td{ :colspan => 3 }= area.area_desc
-  - if info.resources.any?
-    %tr{ :class => cycle }
-      %th{ :colspan => 3 } Resources
-    %tr{ :class => current_cycle }
-      %td{ :colspan => 3 }
-        %ul
-          - info.resources.each do |resource|
-            %li
-              %a{ :href => resource.uri }= resource.resource_desc
-  %tr{ :class => cycle}
-    %th Sender
-    %td{ :colspan => 2 }
-      #{ info.sender_name } (#{ alert.sender })
-  - if info.web
-    %tr{ :class => cycle}
-      %th Web Address 
-      %td{ :colspan => 2 }
-        %a{ :href => info.web }= info.web
-  %tr{ :class => cycle}
-    %th Identifier
-    %td{ :colspan => 2 }= alert.identifier
-  %tr{ :class => cycle}
-    %th Sent
-    %td{ :colspan => 2 }= alert.sent.strftime( "%d %b %Y %H:%M %Z" )
-  - if info.expires
-    %tr{ :class => cycle}
-      %th Expires
-      %td{ :colspan => 2 }= info.expires.strftime( "%d %b %Y %H:%M %Z" )
+%div
+  %h3 Area Description
+  %p= area.area_desc
+  - if area.geocodes.any?
+    %h3 Geocodes
+    %dl
+      - area.geocodes.each do |geocode|
+        %dt= geocode.name
+        %dd= geocode.value

@@ -24,28 +24,78 @@
     - circles_present = @alert.infos.any?{ |info| info.areas.any?{ |area| area.circles.any? }}
     - map_required = polygons_present || circles_present
 
-    - if map_required
-      %h2 Alert Map
-      %p 
-        %strong 
-          Click on the highlighted area for further alerting information
-      #map
-      %script{ :type => 'text/javascript' }
-        var polygonsData = [
-        = @alert.infos.map{ |info| info.areas.map{ |area| area.polygons.any? ? { 'description' => haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area }), 'polygons' => area.polygons.map( &:points ).map{ |points| points.map{ |point| [ point.longitude, point.lattitude ]}}}.to_json : nil }}.flatten.compact.join(',')
-        ];
+    - @alert.infos.each do |info|
+      - info.areas.each do |area|
+        - reset_cycle
+        %table.table.table-condensed
+          %caption= info.event
+          %tr{ :class => cycle }
+            %td{ :colspan => 3 }= info.headline
+          %tr{ :class => cycle }
+            %th Urgency
+            %th Severity
+            %th Certainty
+          %tr.center{ :class => current_cycle }
+            %td= info.urgency.upcase
+            %td= info.severity.upcase
+            %td= info.certainty.upcase
+          %tr{ :class => cycle }
+            %th{ :colspan => 3 } Information
+          %tr{ :class => current_cycle }
+            %td{ :colspan => 3 }= info.description
+          - if !info.instruction.blank?
+            %tr{ :class => cycle}
+              %th{ :colspan => 3 } Instruction
+            %tr{ :class => current_cycle }
+              %td{ :colspan => 3 }= info.instruction
+          %tr{ :class => cycle}
+            %th{ :colspan => 3 } Affected Area
+          %tr{ :class => current_cycle }
+            %td{ :colspan => 3 }= area.area_desc
+          - if map_required
+            %tr
+              %td{ :colspan => 3 }
+                #map
+                %script{ :type => 'text/javascript' }
+                  var polygonsData = [
+                  = @alert.infos.map{ |info| info.areas.map{ |area| area.polygons.any? ? { 'description' => haml( :area_popup, :locals => { :area => area }), 'polygons' => area.polygons.map( &:points ).map{ |points| points.map{ |point| [ point.longitude, point.lattitude ]}}}.to_json : nil }}.flatten.compact.join(',')
+                  ];
 
-        var circlesData = [
-        = @alert.infos.map{ |info| info.areas.map{ |area| area.circles.any? ? { 'description' => haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area }), 'circles' => area.circles.map{ |circle| [ circle.longitude, circle.lattitude, circle.radius ]}}.to_json : nil }}.flatten.compact.join(',')
-        ];
+                  var circlesData = [
+                  = @alert.infos.map{ |info| info.areas.map{ |area| area.circles.any? ? { 'description' => haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area }), 'circles' => area.circles.map{ |circle| [ circle.longitude, circle.lattitude, circle.radius ]}}.to_json : nil }}.flatten.compact.join(',')
+                  ];
 
-      :javascript
-        $( document ).ready( build_map );
-    - else
-      %h2 Alert Details
-      - @alert.infos.each do |info|
-        - info.areas.each do |area|
-          = haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area })
+                :javascript
+                  $( document ).ready( build_map );
+
+          - if info.resources.any?
+            %tr{ :class => cycle }
+              %th{ :colspan => 3 } Resources
+            %tr{ :class => current_cycle }
+              %td{ :colspan => 3 }
+                %ul
+                  - info.resources.each do |resource|
+                    %li
+                      %a{ :href => resource.uri }= resource.resource_desc
+          %tr{ :class => cycle}
+            %th Sender
+            %td{ :colspan => 2 }
+              #{ info.sender_name } (#{ @alert.sender })
+          - if info.web
+            %tr{ :class => cycle}
+              %th Web Address 
+              %td{ :colspan => 2 }
+                %a{ :href => info.web }= info.web
+          %tr{ :class => cycle}
+            %th Identifier
+            %td{ :colspan => 2 }= @alert.identifier
+          %tr{ :class => cycle}
+            %th Sent
+            %td{ :colspan => 2 }= @alert.sent.strftime( "%d %b %Y %H:%M %Z" )
+          - if info.expires
+            %tr{ :class => cycle}
+              %th Expires
+              %td{ :colspan => 2 }= info.expires.strftime( "%d %b %Y %H:%M %Z" )
 
   #xml_tab
     %h2 Exported CAP XML
@@ -94,5 +144,3 @@
   $(document).ready( function(){
     $('#tabs').tabs();
   });
-
-= haml( :form )
