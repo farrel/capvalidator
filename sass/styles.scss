@@ -93,6 +93,16 @@ table {
     color: #FFFFFF;
   }
 
+  tr {
+    td {
+      pre {
+        background-color: inherit;
+        border: none;
+        font-family: inherit;
+      }
+    }
+  }
+
   tr.center {
     text-align: center;
   }

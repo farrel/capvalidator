@@ -48,7 +48,8 @@
             %tr{ :class => cycle}
               %th{ :colspan => 3 } Instruction
             %tr{ :class => current_cycle }
-              %td{ :colspan => 3 }= info.instruction
+              %td{ :colspan => 3 }
+                %pre= info.instruction
           %tr{ :class => cycle}
             %th{ :colspan => 3 } Affected Area
           %tr{ :class => current_cycle }
