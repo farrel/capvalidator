@@ -4,7 +4,7 @@ A Common Alerting Protocol XML document validator currently running at [http://c
 
 To install and run locally:
 
-1. git clone git://github.com/farrel/CAP-Validator.git capvalidator
+1. git clone git://github.com/farrel/capvalidator.git capvalidator
 2. cd capvalidator
 3. bundle install
 4. rackup
