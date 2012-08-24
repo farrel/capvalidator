@@ -6132,18 +6132,17 @@ table caption {
 table tr td pre {
   background-color: inherit;
   border: none;
-  font-family: inherit;
 }
-/* line 106, ../../sass/styles.scss */
+/* line 105, ../../sass/styles.scss */
 table tr.center {
   text-align: center;
 }
-/* line 110, ../../sass/styles.scss */
+/* line 109, ../../sass/styles.scss */
 table tr.even {
   background-color: #EEEEEE;
 }
 
-/* line 116, ../../sass/styles.scss */
+/* line 115, ../../sass/styles.scss */
 form a.btn {
   margin-bottom: 9px;
 }
