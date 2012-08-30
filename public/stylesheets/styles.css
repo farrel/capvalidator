@@ -6134,16 +6134,20 @@ table tr td pre {
   background-color: inherit;
   border: none;
 }
-/* line 106, ../../sass/styles.scss */
+/* line 107, ../../sass/styles.scss */
 table tr.center td {
   text-align: center;
 }
-/* line 110, ../../sass/styles.scss */
+/* line 111, ../../sass/styles.scss */
+table tr.center th {
+  text-align: center;
+}
+/* line 116, ../../sass/styles.scss */
 table tr.even {
   background-color: #EEEEEE;
 }
 
-/* line 116, ../../sass/styles.scss */
+/* line 122, ../../sass/styles.scss */
 form a.btn {
   margin-bottom: 9px;
 }
