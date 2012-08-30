@@ -1,11 +1,3 @@
--if @alert.valid?
-  #result.alert.alert-block.alert-success
-    %h2.alert-heading Your CAP Document Is Valid!
-    %p The document you submitted has been validated as CAP #{ @alert.class::CAP_VERSION }.
-- else
-  #result.alert.alert-block.alert-error
-    %h2.alert-heading Your CAP Document Is Not Valid!
-    %p Validation errors will be listed in the Errors tab.
 
 
 #tabs
@@ -101,6 +93,15 @@
               %td{ :colspan => 2 }= info.expires.strftime( "%d %b %Y %H:%M %Z" )
 
   #xml_tab
+    -if @alert.valid?
+      #result.alert.alert-block.alert-success
+        %h2.alert-heading Your CAP Document Is Valid!
+        %p The document you submitted has been validated as CAP #{ @alert.class::CAP_VERSION }.
+    - else
+      #result.alert.alert-block.alert-error
+        %h2.alert-heading Your CAP Document Is Not Valid!
+        %p Validation errors will be listed in the Errors tab.
+
     %h2 Exported CAP XML
     %p Below is a formatted version of the original CAP Alert.
     ~ CodeRay.scan( @xml_string, :xml).div
