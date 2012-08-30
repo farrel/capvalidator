@@ -103,8 +103,14 @@ table {
     }
   }
 
-  tr.center td {
-    text-align: center;
+  tr.center{
+    td {
+      text-align: center;
+    }
+
+    th {
+      text-align: center;
+    }
   }
 
   tr.even {
