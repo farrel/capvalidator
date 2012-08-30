@@ -6129,25 +6129,21 @@ table caption {
   background-color: #CC0000;
   color: #FFFFFF;
 }
-/* line 98, ../../sass/styles.scss */
-table tr td {
-  text-align: inherit;
-}
 /* line 99, ../../sass/styles.scss */
 table tr td pre {
   background-color: inherit;
   border: none;
 }
-/* line 108, ../../sass/styles.scss */
-table tr.center {
+/* line 106, ../../sass/styles.scss */
+table tr.center td {
   text-align: center;
 }
-/* line 112, ../../sass/styles.scss */
+/* line 110, ../../sass/styles.scss */
 table tr.even {
   background-color: #EEEEEE;
 }
 
-/* line 118, ../../sass/styles.scss */
+/* line 116, ../../sass/styles.scss */
 form a.btn {
   margin-bottom: 9px;
 }
