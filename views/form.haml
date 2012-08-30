@@ -6,7 +6,7 @@
 %form{ :action => '/validate', :method => 'post' } 
   %textarea{ :id => 'cap_data', :name => 'cap_data', :rows => 25 }= h( @cap_data )
   %p
-    %input.btn-primary{ :type => "submit", :value => "Validate" }
+    %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
     %a#clear_button.btn{ href: "#" }Clear
 
 :javascript
@@ -24,7 +24,7 @@
 %form.inline-form{ :action => '/validate_url', :method => 'post' } 
   %p
     %input.input-xxlarge{ :type => 'text', :name => 'cap_data_url', :value => @cap_data_url }
-    %input.btn-primary{ :type => "submit", :value => "Validate" }
+    %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
       
 - if ( nws_alerts = recent_nws_alerts ).any?
   %h2
