@@ -29,8 +29,9 @@
         - reset_cycle
         %table.table.table-condensed
           %caption= info.event
-          %tr{ :class => cycle }
-            %td{ :colspan => 3 }= info.headline
+          %tr.center{ :class => cycle }
+            %td{ :colspan => 3 }
+              %strong= info.headline
           %tr{ :class => cycle }
             %th Urgency
             %th Severity
