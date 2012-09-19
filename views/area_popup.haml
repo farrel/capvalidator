@@ -1,9 +1,3 @@
 %div
   %h3 Area Description
   %p= area.area_desc
-  - if area.geocodes.any?
-    %h3 Geocodes
-    %dl
-      - area.geocodes.each do |geocode|
-        %dt= geocode.name
-        %dd= geocode.value
