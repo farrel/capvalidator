@@ -28,10 +28,10 @@
       
 - if ( nws_alerts = recent_nws_alerts ).any?
   %h2
-    Recent NWS CAP Alerts
+    EPA Airnow EnviroFlash CAP Alerts
   %p
-    Click a link below to validate a recent CAP Alert issued by the
-    %a{ :href=> "http://alerts.weather.gov"}National Weather Service Alerts Feeds.
+    Click a link below to view and validate a recent CAP Alert issued by the
+    %a{ :href=> "http://feeds.enviroflash.info/"}Environmental Protection Agency's Airnow Enviroflash Alerting Service.
     
   %ul
     - nws_alerts.each do |item|

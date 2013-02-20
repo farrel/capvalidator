@@ -73,7 +73,7 @@ helpers do
 
   def recent_nws_alerts
     Timeout.timeout( 10 ) do
-      url = "http://alerts.weather.gov/cap/us.php?x=0"
+      url = "http://feeds.enviroflash.info/cap/aggregate.xml"
       open(url) do |rss|
         RSS::Parser.parse(rss).items[0..4]
       end
