@@ -26,7 +26,7 @@
     %input.input-xxlarge{ :type => 'text', :name => 'cap_data_url', :value => @cap_data_url }
     %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
       
-- if ( nws_alerts = recent_nws_alerts ).any?
+- if ( epa_alerts = recent_epa_alerts ).any?
   %h2
     EPA Airnow EnviroFlash CAP Alerts
   %p
@@ -34,6 +34,6 @@
     %a{ :href=> "http://feeds.enviroflash.info/"}Environmental Protection Agency's Airnow Enviroflash Alerting Service.
     
   %ul
-    - nws_alerts.each do |item|
+    - epa_alerts.each do |item|
       %li
         %a{ :href => validate_file_path( item.link.href )}= item.title.content

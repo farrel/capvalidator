@@ -71,7 +71,7 @@ helpers do
     "/validate_url?cap_data_url=#{ u( url )}"
   end
 
-  def recent_nws_alerts
+  def recent_epa_alerts
     Timeout.timeout( 10 ) do
       url = "http://feeds.enviroflash.info/cap/aggregate.xml"
       open(url) do |rss|
