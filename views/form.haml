@@ -23,7 +23,7 @@
 
 %form.inline-form{ :action => '/validate_url', :method => 'post' } 
   %p
-    %input.input-xxlarge{ :type => 'text', :name => 'cap_data_url', :value => @cap_data_url }
+    %input.input-xxlarge{ :type => 'text', :name => 'cap_data_url', :value => h( @cap_data_url )}
     %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
       
 - if ( epa_alerts = recent_epa_alerts ).any?

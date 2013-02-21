@@ -66,8 +66,8 @@ div.float_right {
 }
 
 #info {
- clear: both;
- margin-top: 10px;
+  clear: both;
+  margin-top: 10px;
 }
 
 #footer {
@@ -95,15 +95,15 @@ table {
   }
 
   tr {
-    td {
-      pre {
-        background-color: inherit;
-        border: none;
-      }
+
+    pre {
+      background-color: inherit;
+      border: none;
+      border-bottom-width: 0px;
     }
   }
 
-  tr.center{
+  tr.center {
     td {
       text-align: center;
     }
@@ -118,8 +118,8 @@ table {
   }
 }
 
-form {
-  a.btn {
-    margin-bottom: 9px;
+.table {
+  td,th {
+    border-top: 0px;
   }
 }

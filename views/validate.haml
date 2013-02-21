@@ -48,7 +48,7 @@
           %tr{ :class => current_cycle }
             %td{ :colspan => 3 }= area.area_desc
           - if map_required
-            %tr
+            %tr{ :class => current_cycle }
               %td{ :colspan => 3 }
                 #map
                 %script{ :type => 'text/javascript' }
