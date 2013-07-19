@@ -10,6 +10,8 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    daemons (1.1.9)
+    eventmachine (1.0.3)
     fssm (0.2.10)
     haml (4.0.0)
       tilt
@@ -26,6 +28,10 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.3)
       tilt (~> 1.3, >= 1.3.3)
+    thin (1.5.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     tilt (1.3.3)
     uuidtools (2.1.3)
 
@@ -39,3 +45,4 @@ DEPENDENCIES
   haml
   rcap
   sinatra
+  thin
