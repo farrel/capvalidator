@@ -1,6 +1,6 @@
 # CAP Validator
 
-A Common Alerting Protocol XML document validator currently running at [http://capvalidator.heroku.com](http://capvalidator.heroku.com).
+A Common Alerting Protocol XML document validator currently running at [http://capvalidator.herokuapp.com](http://capvalidator.herokuapp.com).
 
 To install and run locally:
 
