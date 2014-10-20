@@ -71,24 +71,41 @@ helpers do
   end
 
   def recent_nws_alerts
-    Timeout.timeout(10) do
-      url = 'http://alerts.weather.gov/cap/us.php?x=0'
-      open(url) do |rss|
-        RSS::Parser.parse(rss).items[0..4]
-      end
-    end
-  rescue
-    []
+    @nws_alerts ||= begin 
+                      Timeout.timeout(10) do
+                        url = 'http://alerts.weather.gov/cap/us.php?x=0'
+                        open(url) do |rss|
+                          RSS::Parser.parse(rss).items[0..4]
+                        end
+                      end
+                    rescue
+                      []
+                    end
   end
 
   def recent_epa_alerts
-    Timeout.timeout(10) do
-      url = 'http://feeds.enviroflash.info/cap/aggregate.xml'
-      open(url) do |rss|
-        RSS::Parser.parse(rss).items[0..4]
-      end
-    end
-  rescue
-    []
+    @epa_alerts ||= begin 
+                      Timeout.timeout(10) do
+                        url = 'http://feeds.enviroflash.info/cap/aggregate.xml'
+                        open(url) do |rss|
+                          RSS::Parser.parse(rss).items[0..4]
+                        end
+                      end
+                    rescue
+                      []
+                    end
+  end
+
+  def recent_naad_ca_alerts
+    @naad_ca_alerts ||= begin
+                          Timeout.timeout(10) do
+                            url = 'http://rss.naad-adna.pelmorex.com/'
+                            open(url) do |rss|
+                              RSS::Parser.parse(rss).items[0..4]
+                            end
+                          end
+                        rescue
+                          []
+                        end
   end
 end
