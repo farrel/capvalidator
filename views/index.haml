@@ -34,7 +34,7 @@
   %ul
     - recent_naad_ca_alerts.each do |item|
       %li
-        %a{ :href => validate_file_path( item.link.href )}= item.title.content
+        %a{ :href => validate_file_path( item.link.href )}= item.title.content.capitalize
 
 
 %h2
