@@ -1,72 +1,68 @@
-- if recent_nws_alerts.any?
-  %h2
-    National Weather Service CAP Alerts (USA)
-  %p
-    Click a link below to view and validate a recent CAP Alert issued by the
-    %a{ :href=> "http://alerts.weather.gov"}National Weather Service.
-    
-  %ul
-    - recent_nws_alerts.each do |item|
-      %li
-        %a{ :href => validate_file_path( item.link.href )}= item.title.content
-      
-- if recent_epa_alerts.any?
-  %h2
-    EPA Airnow EnviroFlash CAP Alerts (USA)
-  %p
-    Click a link below to view and validate a recent CAP Alert issued by the
-    %a{ :href=> "http://feeds.enviroflash.info/"}Environmental Protection Agency's Airnow Enviroflash Alerting Service.
-    
-  %ul
-    - recent_epa_alerts.each do |item|
-      %li
-        %a{ :href => validate_file_path( item.link.href )}= item.title.content
+.row
+  .span9
+    %h2
+      Validate a CAP Alert
+    %p
+      Paste your CAP XML Alert in the text area below.
+
+    %form{ :action => '/validate', :method => 'post' } 
+      %textarea{ :id => 'cap_data', :name => 'cap_data', :rows => 25 }= h( @cap_data )
+      %p
+        %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
+        %a#clear_button.btn{ href: "#" }Clear
+
+    :javascript
+      $(document).ready( function() {
+        $('#clear_button').click( function() {
+          $('#cap_data').val( '' );
+        });
+      });
+
+    %h2
+      Validate CAP Alert on the Web
+    %p 
+      Paste a URL to a CAP XML Alert in the text field below.
+
+    %form.inline-form{ :action => '/validate_url', :method => 'post' } 
+      %p
+        %input.input-xxlarge{ :type => 'text', :name => 'cap_data_url', :value => h( @cap_data_url )}
+        %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
+
+  .span3
+    - if recent_nws_alerts.any?
+      %h3
+        NWS CAP Alerts (USA)
+      %p
+        Click a link below to view and validate a recent CAP Alert issued by the
+        %a{ :href=> "http://alerts.weather.gov"}National Weather Service.
+        
+      %ul
+        - recent_nws_alerts.each do |item|
+          %li
+            %a{ :href => validate_file_path( item.link.href )}= item.title.content
+          
+    - if recent_epa_alerts.any?
+      %h3
+        EPA Airnow CAP Alerts (USA)
+      %p
+        Click a link below to view and validate a recent CAP Alert issued by the
+        %a{ :href=> "http://feeds.enviroflash.info/"}Environmental Protection Agency's Airnow Enviroflash Alerting Service.
+        
+      %ul
+        - recent_epa_alerts.each do |item|
+          %li
+            %a{ :href => validate_file_path( item.link.href )}= item.title.content
 
 
-- if recent_naad_ca_alerts.any?
-  %h2
-    National Alert Aggregation & Dissemination System CAP Alerts (Canada)
-  %p
-    Click a link below to view and validate a recent CAP Alert issued by the Canadian
-    %a{ :href=> "https://alerts.pelmorex.com/"}National Alert Aggregation & Dissemination System
-    
-    
-  %ul
-    - recent_naad_ca_alerts.each do |item|
-      %li
-        %a{ :href => validate_file_path( item.link.href )}= item.title.content.capitalize
-
-
-%h2
-  Validate a CAP Alert
-%p
-  Paste your CAP XML Alert in the text area below.
-
-%form{ :action => '/validate', :method => 'post' } 
-  %textarea{ :id => 'cap_data', :name => 'cap_data', :rows => 25 }= h( @cap_data )
-  %p
-    %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
-    %a#clear_button.btn{ href: "#" }Clear
-
-:javascript
-  $(document).ready( function() {
-    $('#clear_button').click( function() {
-      $('#cap_data').val( '' );
-    });
-  });
-
-%h2
-  Validate CAP Alert on the Web
-%p 
-  Paste a URL to a CAP XML Alert in the text field below.
-
-%form.inline-form{ :action => '/validate_url', :method => 'post' } 
-  %p
-    %input.input-xxlarge{ :type => 'text', :name => 'cap_data_url', :value => h( @cap_data_url )}
-    %input.btn.btn-primary{ :type => "submit", :value => "Validate" }
-
-
-:javascript
-  $(document).ready( function(){
-    $('#tabs').tabs();
-  });
+    - if recent_naad_ca_alerts.any?
+      %h3
+        NAAD CAP Alerts (Canada)
+      %p
+        Click a link below to view and validate a recent CAP Alert issued by the Canadian
+        %a{ :href=> "https://alerts.pelmorex.com/"}National Alert Aggregation & Dissemination System
+        
+        
+      %ul
+        - recent_naad_ca_alerts.each do |item|
+          %li
+            %a{ :href => validate_file_path( item.link.href )}= item.title.content.capitalize

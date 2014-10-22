@@ -17,7 +17,7 @@
     - map_required = polygons_present || circles_present
 
     - @alert.infos.first.tap do |info|
-      - info.areas.each do |area|
+      - info.areas.first.tap do |area|
         - reset_cycle
         %table.table.table-condensed
           %caption= info.event
@@ -95,11 +95,11 @@
   #xml_tab
     -if @alert.valid?
       #result.alert.alert-block.alert-success
-        %h2.alert-heading Your CAP Document Is Valid!
+        %h2.alert-heading This CAP Document Is Valid!
         %p The document you submitted has been validated as CAP #{ @alert.class::CAP_VERSION }.
     - else
       #result.alert.alert-block.alert-error
-        %h2.alert-heading Your CAP Document Is Not Valid!
+        %h2.alert-heading This CAP Document Is Not Valid!
         %p Validation errors will be listed in the Errors tab.
 
     %h2 Exported CAP XML
