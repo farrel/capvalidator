@@ -30,7 +30,7 @@
 
   .span3
     - if recent_nws_alerts.any?
-      %h3
+      %h4
         NWS Alerts (USA)
       %p
         Click a link below to view and validate a recent CAP Alert issued by the
@@ -42,7 +42,7 @@
             %a{ :href => validate_file_path( item.link.href )}= item.title.content
           
     - if recent_epa_alerts.any?
-      %h3
+      %h4
         EPA Airnow Alerts (USA)
       %p
         Click a link below to view and validate a recent CAP Alert issued by the
@@ -55,7 +55,7 @@
 
 
     - if recent_naad_ca_alerts.any?
-      %h3
+      %h4
         NAAD Alerts (Canada)
       %p
         Click a link below to view and validate a recent CAP Alert issued by the Canadian
