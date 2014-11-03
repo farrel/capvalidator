@@ -53,11 +53,11 @@
                 #map
                 %script{ :type => 'text/javascript' }
                   var polygonsData = [
-                  = @alert.infos.map{ |info| info.areas.map{ |area| area.polygons.any? ? { 'description' => haml( :area_popup, :locals => { :area => area }), 'polygons' => area.polygons.map( &:points ).map{ |points| points.map{ |point| [ point.longitude, point.lattitude ]}}}.to_json : nil }}.flatten.compact.join(',')
+                  = Array(info).map{ |info| info.areas.map{ |area| area.polygons.any? ? { 'description' => haml( :area_popup, :locals => { :area => area }), 'polygons' => area.polygons.map( &:points ).map{ |points| points.map{ |point| [ point.longitude, point.lattitude ]}}}.to_json : nil }}.flatten.compact.join(',')
                   ];
 
                   var circlesData = [
-                  = @alert.infos.map{ |info| info.areas.map{ |area| area.circles.any? ? { 'description' => haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area }), 'circles' => area.circles.map{ |circle| [ circle.longitude, circle.lattitude, circle.radius ]}}.to_json : nil }}.flatten.compact.join(',')
+                  = Array(infos).map{ |info| info.areas.map{ |area| area.circles.any? ? { 'description' => haml( :area_popup, :locals => { :alert => @alert, :info => info, :area => area }), 'circles' => area.circles.map{ |circle| [ circle.longitude, circle.lattitude, circle.radius ]}}.to_json : nil }}.flatten.compact.join(',')
                   ];
 
                 :javascript
