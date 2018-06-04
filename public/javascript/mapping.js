@@ -9,10 +9,10 @@ function onPopupClose(evt) {
 function onFeatureSelect(feature) {
   selectedFeature = feature;
   popup = new OpenLayers.Popup.FramedCloud("cap_frame",
-      feature.geometry.getBounds().getCenterLonLat(),
-      null,
-      selectedFeature.attributes.popupContent,
-      null, true, onPopupClose);
+    feature.geometry.getBounds().getCenterLonLat(),
+    null,
+    selectedFeature.attributes.popupContent,
+    null, true, onPopupClose);
   feature.popup = popup;
   map.addPopup(popup);
 }
@@ -34,7 +34,7 @@ function createPolygonFeature( polygonPopupContent, polygonCoords ) {
   var attributes = {
     popupContent: polygonPopupContent
   };
-  
+
   return new OpenLayers.Feature.Vector( polygon.transform( fromProjection, toProjection ), attributes ); 
 }
 
@@ -61,7 +61,7 @@ function createCircleFeature( circlePopupContent, circleCoords ) {
   var attributes = {
     popupContent: circlePopupContent
   };
-  
+
   return new OpenLayers.Feature.Vector( circle.transform( fromProjection, toProjection ), attributes ); 
 }
 
@@ -83,7 +83,8 @@ function init_map(){
     units: 'm',
     projection: fromProjection,
     displayProjection: toProjection });
-  var osm = new OpenLayers.Layer.OSM();
+  var osm = new OpenLayers.Layer.OSM("OSM Humanitarian Map",
+    ["http://a.tile.stamen.com/toner/${z}/${x}/${y}.png"]);
   map.addLayer( osm );
 
   return map;
